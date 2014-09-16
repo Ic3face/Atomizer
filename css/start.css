@@ -1,1 +1,8 @@
 /*DUDEMASTER*/
+
+.start .atom {
+    background:url(../resources/img/atom-sprite.jpg);
+    display: inline-block;
+    height: 45px;
+    width: 45px;
+}
