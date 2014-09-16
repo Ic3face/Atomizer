@@ -4,9 +4,13 @@ var firstAtom = '';
 var secondAtom = '';
 var winLinks = new Array();
 var winAtoms = new Array();
+var linkMode = false;
+var deleteMode = false;
+var mousefollower = jQuery('#mousefollower');
 
 
 function initPlayground() {
+    var playground = jQuery('#playground');
     var x = 34;
     var y = 15;
     var odd = true;
@@ -19,8 +23,8 @@ function initPlayground() {
         tile.setAttribute('class', 'tile');
         tile.setAttribute('id', tileId);
         tile.setAttribute('style', tileStyle);
-        tile.setAttribute('onclick', 'setElement(event)');
-        jQuery('#playground').append(tile);
+        tile.setAttribute('onclick', 'clickTile(event)');
+        playground.append(tile);
 
         if(lineCounter%4 == 0 && odd) {
             x = 144;
@@ -40,17 +44,52 @@ function initPlayground() {
 }
 
 jQuery(document).bind('mousemove', function(e) {
-    jQuery('#mousefollower').css({
+    mousefollower.css({
         left: e.pageX+5,
         top: e.pageY+5
     });
 });
 
+jQuery('.tile').bind('mouseenter', function() {
+    console.log("test");
+});
+
+function toggleLinkMode() {
+    if(linkMode) {
+        linkMode = false;
+        jQuery('.toggleLinkMode').removeClass('active');
+    } else {
+        linkMode = true;
+        deleteMode = false;
+        jQuery('.toggleLinkMode').addClass('active');
+        jQuery('.toggleDeleteMode').removeClass('active');
+    }
+    console.log(linkMode);
+}
+
+function toggleDeleteMode() {
+    if(deleteMode) {
+        deleteMode = false;
+        jQuery('.toggleDeleteMode').removeClass('active');
+    } else {
+        deleteMode = true;
+        linkMode = false;
+        jQuery('.toggleDeleteMode').addClass('active');
+        jQuery('.toggleLinkMode').removeClass('active');
+    }
+    console.log(deleteMode);
+}
+
 function getElement(sign,free,color) {
+
+    linkMode = false;
+    deleteMode = false;
+    jQuery('.toggleLinkMode').removeClass('active');
+    jQuery('.toggleDeleteMode').removeClass('active');
 
     var newElement = '<div sign="'+sign+'" class="atom">';
 
-    newElement += '<div style="background:#'+color+'" class="atomshape" onclick="initAtomMenu(event)">'+sign+'</div>';
+    newElement += '<div style="background:#'+color+'" class="atomshape" onclick="clickAtom(event)" onmouseover="hoverAtom(event)" >'+sign+'</div>';
     for(var i = 1; i <= free; i++) {
         newElement += '<div class="electron nr-'+i+' count-'+free+' free" onclick="buildLink(event)"></div>';
     }
@@ -58,14 +97,26 @@ function getElement(sign,free,color) {
     jQuery('#mousefollower').html(newElement);
 }
 
-function setElement(e, element) {
-    var atom = jQuery('#mousefollower').html();
-    if(atom && jQuery(e.target).hasClass('tile')) {
-        jQuery(e.target).html(atom);
+function clickTile(e) {
+    if(mousefollower.html() != '' && jQuery(e.target).hasClass('tile')) {
+        console.log(jQuery(e.target));
+        jQuery(e.target).html(mousefollower.html());
         jQuery('#mousefollower').html('');
     }
 }
 
+function clickAtom(e) {
+    if(deleteMode) {
+        deleteAtom(e);
+    }
+
+}
+
+function hoverAtom(e) {
+    console.log('atomhover');
+}
+
+/*
 function initAtomMenu(e) {
     jQuery('.atom .menu').remove();
     if(firstAtom == '') {
@@ -83,14 +134,10 @@ function initAtomMenu(e) {
     }
 
 }
-
-function closeAtomMenu(e){
-    jQuery(e.target).parent().remove();
-}
-
+*/
 function deleteAtom(e) {
     var effectedAtoms = new Array();
-    var tile = jQuery(e.target).parent().parent().parent();
+    var tile = jQuery(e.target).parent().parent();
     var linkSelector;
     tile.html('');
     tile.removeClass('active');

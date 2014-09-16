@@ -1,7 +1,7 @@
 {
     "atoms": ["H","O"],
     "name": "Wasser marsch!",
-    "desc": "Lange Beschreibung was zu machen ist BLA BLA BLA BLA ..... lass dir was einfallen",
+    "desc": "Lange Beschreibung was zu machen ist BLA BLA BLA BLA ..... lass dir was einfallen,Lange Beschreibung was zu machen ist BLA BLA BLA BLA ..... lass dir was einfallen,Lange Beschreibung was zu machen ist BLA BLA BLA BLA ..... lass dir was einfallen",
     "hint": "H2O",
     "winstate": {
         "links": [["H","O"],["H","O"]],

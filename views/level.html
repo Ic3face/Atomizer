@@ -1,6 +1,10 @@
 <div class="level">
     <div id="mousefollower"></div>
     <div class="left-col">
+        <div class="actions">
+            <span class="toggleLinkMode" onclick="toggleLinkMode();">LINK</span>
+            <span class="toggleDeleteMode" onclick="toggleDeleteMode();">DELETE</span>
+        </div>
         <ul class="level-menu">
             <li ng-repeat="atom in atoms" ng-click="getElement(atom.sign,atom.free,atom.color)" >
                 <img ng-src="resources/img/menu-elements/{{atom.sign}}.jpg" title="{{atom.name}}" >
@@ -9,6 +13,13 @@
     </div>
     <div class="main-col" id="playground">
 
+    </div>
+    <div class="right-col">
+        <ul class="level-info">
+            <li class="name">{{task.name}}</li>
+            <li class="hint">{{task.hint}}</li>
+            <li class="desc">{{task.desc}}</li>
+        </ul>
     </div>
 </div>
 

@@ -8,14 +8,50 @@
     background:#6b6b6b;
     border:1px solid #fff;
     margin-right:20px;
+    position: relative;
 }
-
 .level .main-col {
     float:left;
     height:700px;
     width: 826px;
     background:#4a4a4a;
     border:1px solid #fff;
+}
+.level .right-col {
+    float:left;
+    height:700px;
+    width: 178px;
+    background:#6b6b6b;
+    border:1px solid #fff;
+    margin-left:20px;
+    color:#fff;
+}
+.level .right-col ul li {
+    margin:10px;
+}
+.level .right-col .name {
+    font-size: 30px;
+    text-align: center;
+}
+.left-col .actions {
+    position: absolute;
+    top:0;
+    left:0;
+}
+.left-col .actions span {
+    background: #ddd;
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    width: 73px;
+    cursor:pointer;
+}
+.left-col .actions span.active {
+    background:#f00;
+}
+.level-menu {
+    margin-top:40px;
 }
 .level-menu li {
     width:100%;

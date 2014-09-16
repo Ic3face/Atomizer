@@ -1,7 +1,7 @@
 {
     "atoms": ["H"],
     "name": "Tutorial",
-    "desc": "Lange Beschreibung was zu machen ist BLA BLA BLA BLA ..... lass dir was einfallen",
+    "desc": "Lange Beschreibung was zu machen ist BLA BLA BLA BLA ..... lass dir was einfallen,Lange Beschreibung was zu machen ist BLA BLA BLA BLA ..... lass dir was einfallen,Lange Beschreibung was zu machen ist BLA BLA BLA BLA ..... lass dir was einfallen",
     "hint": "H2",
     "winstate": {
         "links": [["H","H"]],
