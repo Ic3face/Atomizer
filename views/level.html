@@ -1,0 +1,14 @@
+<div class="level">
+    <div id="mousefollower"></div>
+    <div class="left-col">
+        <ul class="level-menu">
+            <li ng-repeat="atom in atoms" ng-click="getElement(atom.sign,atom.free,atom.color)" >
+                <img ng-src="resources/img/menu-elements/{{atom.sign}}.jpg" title="{{atom.name}}" >
+            </li>
+        </ul>
+    </div>
+    <div class="main-col" id="playground">
+
+    </div>
+</div>
+

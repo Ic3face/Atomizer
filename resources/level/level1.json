@@ -1,0 +1,33 @@
+{
+    "atoms": ["H","O"],
+    "tasks": {
+        "task1": {
+            "name": "Tutorial",
+            "desc": "Lange Beschreibung was zu machen ist BLA BLA BLA BLA ..... lass dir was einfallen",
+            "hint": "H2",
+            "winstate": {
+                "links": [["H","H"]],
+                "atoms": ["H","H"]
+            }
+        },
+        "task2": {
+            "name": "Baue Wasser",
+            "desc": "Lange Beschreibung was zu machen ist BLA BLA BLA BLA ..... lass dir was einfallen",
+            "hint": "H2O",
+            "winstate": {
+                "links": [["O","H"],["O","H"]],
+                "atoms": ["O","H","H"]
+            }
+        },
+        "task3": {
+            "name": "Wasserstoffperoxid",
+            "desc": "Lange Beschreibung was zu machen ist BLA BLA BLA BLA ..... lass dir was einfallen",
+            "hint": "H2O2",
+            "winstate": {
+                "links": [["O","H"],["O","H"],["O","O"]],
+                "atoms": ["O","H","O","H"]
+            }
+        }
+
+    }
+}
