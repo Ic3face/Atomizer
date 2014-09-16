@@ -24,7 +24,7 @@ atomizerApp.config(['$routeProvider', function(routeProvider) {
 }]);
 
 atomizerApp.controller('StartCtrl', ['$scope', function(scope) {
-
+    jQuery('.start').append('<link rel="stylesheet" href="css/start.css" />');
 }]);
 
 atomizerApp.controller('MenuCtrl', ['$scope', function(scope) {
