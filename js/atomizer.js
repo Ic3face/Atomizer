@@ -33,6 +33,7 @@ atomizerApp.controller('MenuCtrl', ['$scope', function(scope) {
 
 atomizerApp.controller('LevelCtrl', ['$scope', '$routeParams', '$http', function(scope, routeParams, http) {
     scope.atoms = new Array();
+    jQuery('.level').append('<link rel="stylesheet" href="css/level.css" />');
     jQuery('.level').append('<script src="js/level.js"></script>');
     http({
         url: 'resources/level/'+routeParams.level+'/task'+routeParams.task+'.json',
