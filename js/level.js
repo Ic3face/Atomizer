@@ -50,11 +50,11 @@ jQuery(document).bind('mousemove', function(e) {
     });
 });
 
-jQuery('.tile').bind('mouseenter', function() {
-    console.log("test");
-});
-
 function toggleLinkMode() {
+    firstAtom = '';
+    secondAtom = '';
+    jQuery('.firstAtom').removeClass('firstAtom');
+    mousefollower.html('');
     if(linkMode) {
         linkMode = false;
         jQuery('.toggleLinkMode').removeClass('active');
@@ -64,10 +64,13 @@ function toggleLinkMode() {
         jQuery('.toggleLinkMode').addClass('active');
         jQuery('.toggleDeleteMode').removeClass('active');
     }
-    console.log(linkMode);
 }
 
 function toggleDeleteMode() {
+    firstAtom = '';
+    secondAtom = '';
+    jQuery('.firstAtom').removeClass('firstAtom');
+    mousefollower.html('');
     if(deleteMode) {
         deleteMode = false;
         jQuery('.toggleDeleteMode').removeClass('active');
@@ -77,19 +80,20 @@ function toggleDeleteMode() {
         jQuery('.toggleDeleteMode').addClass('active');
         jQuery('.toggleLinkMode').removeClass('active');
     }
-    console.log(deleteMode);
 }
 
 function getElement(sign,free,color) {
 
     linkMode = false;
     deleteMode = false;
+    firstAtom = '';
+    jQuery('.firstAtom').removeClass('firstAtom');
     jQuery('.toggleLinkMode').removeClass('active');
     jQuery('.toggleDeleteMode').removeClass('active');
 
     var newElement = '<div sign="'+sign+'" class="atom">';
 
-    newElement += '<div style="background:#'+color+'" class="atomshape" onclick="clickAtom(event)" onmouseover="hoverAtom(event)" >'+sign+'</div>';
+    newElement += '<div style="background:#'+color+'" class="atomshape" onclick="clickAtom(event)" onmouseover="startHoverAtom(event)" onmouseout="stopHoverAtom(event)" >'+sign+'</div>';
     for(var i = 1; i <= free; i++) {
         newElement += '<div class="electron nr-'+i+' count-'+free+' free" onclick="buildLink(event)"></div>';
     }
@@ -99,7 +103,6 @@ function getElement(sign,free,color) {
 
 function clickTile(e) {
     if(mousefollower.html() != '' && jQuery(e.target).hasClass('tile')) {
-        console.log(jQuery(e.target));
         jQuery(e.target).html(mousefollower.html());
         jQuery('#mousefollower').html('');
     }
@@ -108,39 +111,130 @@ function clickTile(e) {
 function clickAtom(e) {
     if(deleteMode) {
         deleteAtom(e);
+        return;
     }
+    if(linkMode) {
+        if(firstAtom == '') {
+            firstAtom = jQuery(e.target).parent();
+            firstAtom.parent().addClass('firstAtom');
+            if(firstAtom.children('.free').length == 0) {
+                cancelLink("Keine Freien Elektronen vorhanden");
+            }
 
-}
-
-function hoverAtom(e) {
-    console.log('atomhover');
-}
-
-/*
-function initAtomMenu(e) {
-    jQuery('.atom .menu').remove();
-    if(firstAtom == '') {
-        var menu = '<ul class="menu"><li class="close" onclick="closeAtomMenu(event)" >X</li>';
-        if(jQuery(e.target).parent().children('.free').length > 0) {
-            menu += '<li onclick="initLink(event)">Verbindung von hier</li>';
+        } else {
+            secondAtom = jQuery(e.target).parent();
+            buildLink();
         }
-        menu += '<li onclick="deleteAtom(event)">Atom löschen</li>';
-        menu += '</ul>';
-        jQuery(e.target).parent().append(menu);
-    }else {
-        secondAtom = jQuery(e.target).parent();
-        buildLink();
-
     }
 
 }
-*/
+
+function startHoverAtom(e) {
+    if(deleteMode) {
+        startDeleteHover(e);
+    }else if(linkMode){
+        startLinkHover(e);
+    }
+}
+
+function stopHoverAtom(e) {
+    if(deleteMode) {
+        stopDeleteHover(e);
+    }else if(linkMode){
+        stopLinkHover(e);
+    }
+}
+
+function startDeleteHover(e) {
+    var tile = jQuery(e.target).parent().parent();
+    tile.addClass('red');
+    for(var i=0; i < links.length; i++) {
+        if(tile.attr('id') == links[i][1] || tile.attr('id') == links[i][2]){
+            jQuery('.link[linkid="'+links[i][3]+'"]').addClass('red');
+        }
+    }
+}
+
+function stopDeleteHover(e) {
+    var tile = jQuery(e.target).parent().parent();
+    tile.removeClass('red');
+    for(var i=0; i < links.length; i++) {
+        if(tile.attr('id') == links[i][1] || tile.attr('id') == links[i][2]){
+            jQuery('.link[linkid="'+links[i][3]+'"]').removeClass('red');
+        }
+    }
+}
+
+function startLinkHover(e) {
+    var tile = jQuery(e.target).parent().parent();
+    if(tile.children('.atom').children('.free').length > 0) {
+        tile.addClass('green');
+        if(firstAtom != ''){
+            var firstTile = firstAtom.parent();
+            var secondTile = tile;
+            var firstLeft = firstTile.position().left;
+            var firstTop = firstTile.position().top;
+            var secondLeft = secondTile.position().left;
+            var secondTop = secondTile.position().top;
+            var distance = Math.sqrt((firstLeft-secondLeft)*(firstLeft-secondLeft)+(firstTop-secondTop)*(firstTop-secondTop));
+            if(distance > 150){
+                return;
+            }
+            if(firstLeft > secondLeft && firstTop > secondTop ) {
+                x1 = firstLeft+11;
+                y1 = firstTop+19;
+                x2 = secondLeft+87;
+                y2 = secondTop+63;
+            } else if(firstLeft == secondLeft && firstTop > secondTop) {
+                x1 = firstLeft+47;
+                y1 = firstTop-3;
+                x2 = secondLeft+47;
+                y2 = secondTop+87;
+            } else if(firstLeft < secondLeft && firstTop > secondTop) {
+                x1 = firstLeft+86;
+                y1 = firstTop+20;
+                x2 = secondLeft+11;
+                y2 = secondTop+64;
+            } else if(firstLeft < secondLeft && firstTop < secondTop) {
+                x1 = firstLeft+87;
+                y1 = firstTop+63;
+                x2 = secondLeft+11;
+                y2 = secondTop+19;
+            } else if(firstLeft == secondLeft && firstTop < secondTop) {
+                x1 = firstLeft+47;
+                y1 = firstTop+87;
+                x2 = secondLeft+47;
+                y2 = secondTop-3;
+            } else if(firstLeft > secondLeft && firstTop < secondTop) {
+                x1 = firstLeft+11;
+                y1 = firstTop+64;
+                x2 = secondLeft+86;
+                y2 = secondTop+20;
+            }
+
+            //Die neue Verbindung Zeichnen
+            drawLink(x1,y1,x2,y2, false);
+        }
+    }
+
+
+}
+
+function stopLinkHover(e) {
+    var tile = jQuery(e.target).parent().parent();
+    tile.removeClass('green');
+    jQuery('.link.green').remove();
+
+}
+
+
 function deleteAtom(e) {
     var effectedAtoms = new Array();
     var tile = jQuery(e.target).parent().parent();
     var linkSelector;
     tile.html('');
     tile.removeClass('active');
+    tile.removeClass('red');
 
     for(var i = 0; i < links.length; i++) {
         if(links[i][1] == tile.attr('id')) {
@@ -164,12 +258,6 @@ function deleteAtom(e) {
 
     }
     checkWin();
-}
-
-function initLink(e) {
-    firstAtom = jQuery(e.target).parent().parent();
-    jQuery(e.target).parent().parent().children('.free').first().removeClass('free').addClass('waiting');
-    jQuery(e.target).parent('.menu').remove();
 }
 
 function buildLink() {
@@ -224,7 +312,7 @@ function buildLink() {
     secondTile.addClass('active');
 
     //Entferne Zwei Freie Elektronen
-    jQuery(firstAtom).children('.waiting').removeClass('waiting').addClass('used');
+    jQuery(firstAtom).children('.free').first().removeClass('free').addClass('used');
     jQuery(secondAtom).children('.free').first().removeClass('free').addClass('used');
 
     //Position der Tiles zueinander bestimmen und dementsprechend die Werte für die Bindung bauen
@@ -261,7 +349,7 @@ function buildLink() {
     }
 
     //Die neue Verbindung Zeichnen
-    drawLink(x1,y1,x2,y2);
+    drawLink(x1,y1,x2,y2, true);
 
     //Verbindung in das Verbindungsarray Eintragen
 
@@ -276,6 +364,9 @@ function buildLink() {
     //Die Atome zurücksetzen
     firstAtom = '';
     secondAtom = '';
+    jQuery('.firstAtom').removeClass('firstAtom');
+    jQuery('.tile.green').removeClass('green');
+    jQuery('.link.green').remove();
 }
 
 function buildDoppelLink() {
@@ -295,7 +386,7 @@ function buildDoppelLink() {
     }
 
     //Entferne Zwei Freie Elektronen
-    jQuery(firstAtom).children('.waiting').removeClass('waiting').addClass('used');
+    jQuery(firstAtom).children('.free').first().removeClass('free').addClass('used');
     jQuery(secondAtom).children('.free').first().removeClass('free').addClass('used');
 
     //Position der Tiles zueinander bestimmen und dementsprechend die Werte für die Bindung bauen
@@ -342,7 +433,7 @@ function buildDoppelLink() {
     }
 
     //Die neue Verbindung Zeichnen
-    drawLink(x1,y1,x2,y2);
+    drawLink(x1,y1,x2,y2, true);
 
     links.push([
         firstAtom.attr('sign')+secondAtom.attr('sign'),
@@ -355,17 +446,19 @@ function buildDoppelLink() {
     //Die Atome zurücksetzen
     firstAtom = '';
     secondAtom = '';
+    jQuery('.firstAtom').removeClass('firstAtom');
+    jQuery('.tile.green').removeClass('green');
+    jQuery('.link.green').remove();
 
 }
 
 function cancelLink(error) {
     alert(error);
-    jQuery('.atom .electron.waiting').removeClass('waiting').addClass('free');
     firstAtom = '';
     secondAtom = '';
 }
 
-function drawLink(x1, y1, x2, y2){
+function drawLink(x1, y1, x2, y2, permenant){
 
     if(y1 < y2){
         var pom = y1;
@@ -396,8 +489,12 @@ function drawLink(x1, y1, x2, y2){
     var deg = (rad*180)/Math.PI
 
     div = document.createElement("div");
+    if(permenant) {
+        div.setAttribute('class','link');
+    } else {
+        div.setAttribute('class','link green');
+    }
     div.setAttribute('style','width:'+width+'px;-moz-transform:rotate('+deg+'deg);-webkit-transform:rotate('+deg+'deg);top:'+y+'px;left:'+x+'px;');
-    div.setAttribute('class','link');
     div.setAttribute('onclick','deleteLine(event)');
     div.setAttribute('linkId', linkId);
 

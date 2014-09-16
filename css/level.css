@@ -71,6 +71,12 @@
 .level .tile.active {
     background:url(../resources/img/active-tile.png);
 }
+.level .tile.green, .level .tile.firstAtom {
+    background:url(../resources/img/green-tile.png);
+}
+.level .tile.red {
+    background:url(../resources/img/red-tile.png);
+}
 .level #mousefollower {
     position: absolute;
     z-index:1000;
@@ -101,7 +107,7 @@
     border:5px solid #fff;
 }
 .level .electron.waiting {
-    border:5px solid #f00;
+    border:5px solid #009640;
 }
 .level .electron.used {
     display:none
@@ -320,6 +326,12 @@
     position: absolute;
     height:0px;
     border:2px solid #dadada;
+}
+.level .link.red {
+    border-color: #e30613;
+}
+.level .link.green {
+    border-color: #009640;
 }
 .level .atom .menu {
     position: absolute;
