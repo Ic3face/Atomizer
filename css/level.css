@@ -1,118 +1,120 @@
-
-
 /* Level CSS */
-.level .left-col {
+.level .left-col{
     float:left;
     height:700px;
-    width: 150px;
+    width:150px;
     background:#6b6b6b;
     border:1px solid #fff;
     margin-right:20px;
-    position: relative;
+    position:relative;
 }
-.level .main-col {
+.level .main-col{
     float:left;
     height:700px;
-    width: 826px;
+    width:826px;
     background:#4a4a4a;
     border:1px solid #fff;
 }
-.level .right-col {
+.level .right-col{
     float:left;
     height:700px;
-    width: 178px;
+    width:178px;
     background:#6b6b6b;
     border:1px solid #fff;
     margin-left:20px;
     color:#fff;
 }
-.level .right-col ul li {
+.level .right-col ul li{
     margin:10px;
 }
-.level .right-col .name {
-    font-size: 30px;
-    text-align: center;
+.level .right-col .name{
+    font-size:30px;
+    text-align:center;
 }
-.left-col .actions {
-    position: absolute;
+.left-col .actions{
+    position:absolute;
     top:0;
     left:0;
 }
-.left-col .actions span {
-    background: #ddd;
-    display: inline-block;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    width: 73px;
+.left-col .actions span{
+    background:#ddd;
+    display:inline-block;
+    height:30px;
+    line-height:30px;
+    text-align:center;
+    width:73px;
     cursor:pointer;
 }
-.left-col .actions span.active {
+.left-col .actions span.active{
     background:#f00;
 }
-.level-menu {
+.level-menu{
     margin-top:40px;
 }
-.level-menu li {
+.level-menu li{
     width:100%;
-    text-align: center;
+    text-align:center;
     margin:9px 0;
     cursor:pointer;
 }
-#playground {
-    position: relative;
+#playground{
+    position:relative;
 }
-.level .tile {
+.level .tile{
     height:87px;
     width:100px;
     background:url(../resources/img/tile.png);
-    position: absolute;
+    position:absolute;
 }
-.level .tile.active {
+.level .tile.active{
     background:url(../resources/img/active-tile.png);
 }
-.level .tile.green, .level .tile.firstAtom {
+.level .tile.green, .level .tile.firstAtom{
     background:url(../resources/img/green-tile.png);
 }
-.level .tile.red {
+.level .tile.red{
     background:url(../resources/img/red-tile.png);
 }
-.level #mousefollower {
-    position: absolute;
+.level #mousefollower{
+    position:absolute;
     z-index:1000;
 }
-.level .atomshape {
+.level .atomshape{
     height:36px;
     width:36px;
+    -webkit-border-radius:36px;
+    -moz-border-radius:36px;
     border-radius:36px;
-    text-align: center;
-    line-height: 36px;
+    text-align:center;
+    line-height:36px;
     color:#fff;
     font-size:24px;
     text-shadow:0 1px 0 #000;
-    position: absolute;
+    position:absolute;
     top:25px;
     left:31px;
-    cursor: pointer;
+    cursor:pointer;
 }
-.level .electron {
+.level .electron{
+    -webkit-border-radius:12px;
+    -moz-border-radius:12px;
     border-radius:12px;
-    position: absolute;
+    position:absolute;
     top:39px;
     left:44px;
     height:0;
     width:0;
 }
-.level .electron.free {
+.level .electron.free{
     border:5px solid #fff;
 }
-.level .electron.waiting {
+.level .electron.waiting{
     border:5px solid #009640;
 }
-.level .electron.used {
-    display:none
+.level .electron.used{
+    display:none;
 }
-@keyframes electron-1 {
+@keyframes electron-1{
     from {
         transform: rotate(0deg)
         translate(28px)
@@ -124,7 +126,7 @@
         rotate(-360deg);
     }
 }
-@keyframes electron-2-2 {
+@keyframes electron-2-2{
     from {
         transform: rotate(180deg)
         translate(28px)
@@ -136,7 +138,7 @@
         rotate(-360deg);
     }
 }
-@keyframes electron-2-3 {
+@keyframes electron-2-3{
     from {
         transform: rotate(120deg)
         translate(28px)
@@ -148,7 +150,7 @@
         rotate(-360deg);
     }
 }
-@keyframes electron-3-3 {
+@keyframes electron-3-3{
     from {
         transform: rotate(240deg)
         translate(28px)
@@ -160,7 +162,7 @@
         rotate(-360deg);
     }
 }
-@keyframes electron-3-4 {
+@keyframes electron-3-4{
     from {
         transform: rotate(90deg)
         translate(28px)
@@ -172,7 +174,7 @@
         rotate(-360deg);
     }
 }
-@keyframes electron-4-4 {
+@keyframes electron-4-4{
     from {
         transform: rotate(270deg)
         translate(28px)
@@ -184,7 +186,7 @@
         rotate(-360deg);
     }
 }
-@keyframes electron-2-5 {
+@keyframes electron-2-5{
     from {
         transform: rotate(72deg)
         translate(28px)
@@ -196,7 +198,7 @@
         rotate(-360deg);
     }
 }
-@keyframes electron-3-5 {
+@keyframes electron-3-5{
     from {
         transform: rotate(144deg)
         translate(28px)
@@ -208,7 +210,7 @@
         rotate(-360deg);
     }
 }
-@keyframes electron-4-5 {
+@keyframes electron-4-5{
     from {
         transform: rotate(216deg)
         translate(28px)
@@ -220,7 +222,7 @@
         rotate(-360deg);
     }
 }
-@keyframes electron-5-5 {
+@keyframes electron-5-5{
     from {
         transform: rotate(288deg)
         translate(28px)
@@ -232,7 +234,7 @@
         rotate(-360deg);
     }
 }
-@keyframes electron-2-6 {
+@keyframes electron-2-6{
     from {
         transform: rotate(60deg)
         translate(28px)
@@ -244,7 +246,7 @@
         rotate(-360deg);
     }
 }
-@keyframes electron-3-6 {
+@keyframes electron-3-6{
     from {
         transform: rotate(120deg)
         translate(28px)
@@ -256,7 +258,7 @@
         rotate(-360deg);
     }
 }
-@keyframes electron-5-6 {
+@keyframes electron-5-6{
     from {
         transform: rotate(240deg)
         translate(28px)
@@ -268,7 +270,7 @@
         rotate(-360deg);
     }
 }
-@keyframes electron-6-6 {
+@keyframes electron-6-6{
     from {
         transform: rotate(300deg)
         translate(28px)
@@ -280,89 +282,317 @@
         rotate(-360deg);
     }
 }
-.level .electron.nr-1 {
-    animation: electron-1 5s infinite linear;
+
+/* Webkit prefix keyframes */
+@-webkit-keyframes electron-1{
+    from {
+        transform: rotate(0deg)
+        translate(28px)
+        rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg)
+        translate(28px)
+        rotate(-360deg);
+    }
 }
-.level .electron.nr-2.count-2,.level .electron.nr-2.count-4,.level .electron.nr-4.count-6 {
-    animation: electron-2-2 5s infinite linear;
+@-webkit-keyframes electron-2-2{
+    from {
+        transform: rotate(180deg)
+        translate(28px)
+        rotate(0deg);
+    }
+    to {
+        transform: rotate(540deg)
+        translate(28px)
+        rotate(-360deg);
+    }
 }
-.level .electron.nr-2.count-3 {
-    animation: electron-2-3 5s infinite linear;
+@-webkit-keyframes electron-2-3{
+    from {
+        transform: rotate(120deg)
+        translate(28px)
+        rotate(0deg);
+    }
+    to {
+        transform: rotate(480deg)
+        translate(28px)
+        rotate(-360deg);
+    }
 }
-.level .electron.nr-3.count-3 {
-    animation: electron-3-3 5s infinite linear;
+@-webkit-keyframes electron-3-3{
+    from {
+        transform: rotate(240deg)
+        translate(28px)
+        rotate(0deg);
+    }
+    to {
+        transform: rotate(600deg)
+        translate(28px)
+        rotate(-360deg);
+    }
 }
-.level .electron.nr-3.count-4 {
-    animation: electron-3-4 5s infinite linear;
+@-webkit-keyframes electron-3-4{
+    from {
+        transform: rotate(90deg)
+        translate(28px)
+        rotate(0deg);
+    }
+    to {
+        transform: rotate(450deg)
+        translate(28px)
+        rotate(-360deg);
+    }
 }
-.level .electron.nr-4.count-4 {
-    animation: electron-4-4 5s infinite linear;
+@-webkit-keyframes electron-4-4{
+    from {
+        transform: rotate(270deg)
+        translate(28px)
+        rotate(0deg);
+    }
+    to {
+        transform: rotate(630deg)
+        translate(28px)
+        rotate(-360deg);
+    }
 }
-.level .electron.nr-2.count-5 {
-    animation: electron-2-5 5s infinite linear;
+@-webkit-keyframes electron-2-5{
+    from {
+        transform: rotate(72deg)
+        translate(28px)
+        rotate(0deg);
+    }
+    to {
+        transform: rotate(432deg)
+        translate(28px)
+        rotate(-360deg);
+    }
 }
-.level .electron.nr-3.count-5 {
-    animation: electron-3-5 5s infinite linear;
+@-webkit-keyframes electron-3-5{
+    from {
+        transform: rotate(144deg)
+        translate(28px)
+        rotate(0deg);
+    }
+    to {
+        transform: rotate(504deg)
+        translate(28px)
+        rotate(-360deg);
+    }
 }
-.level .electron.nr-4.count-5 {
-    animation: electron-4-5 5s infinite linear;
+@-webkit-keyframes electron-4-5{
+    from {
+        transform: rotate(216deg)
+        translate(28px)
+        rotate(0deg);
+    }
+    to {
+        transform: rotate(576deg)
+        translate(28px)
+        rotate(-360deg);
+    }
 }
-.level .electron.nr-5.count-5 {
-    animation: electron-5-5 5s infinite linear;
+@-webkit-keyframes electron-5-5{
+    from {
+        transform: rotate(288deg)
+        translate(28px)
+        rotate(0deg);
+    }
+    to {
+        transform: rotate(648deg)
+        translate(28px)
+        rotate(-360deg);
+    }
 }
-.level .electron.nr-2.count-6 {
-    animation: electron-2-6 5s infinite linear;
+@-webkit-keyframes electron-2-6{
+    from {
+        transform: rotate(60deg)
+        translate(28px)
+        rotate(0deg);
+    }
+    to {
+        transform: rotate(420deg)
+        translate(28px)
+        rotate(-360deg);
+    }
 }
-.level .electron.nr-3.count-6 {
-    animation: electron-3-6 5s infinite linear;
+@-webkit-keyframes electron-3-6{
+    from {
+        transform: rotate(120deg)
+        translate(28px)
+        rotate(0deg);
+    }
+    to {
+        transform: rotate(480deg)
+        translate(28px)
+        rotate(-360deg);
+    }
 }
-.level .electron.nr-5.count-6 {
-    animation: electron-5-6 5s infinite linear;
+@-webkit-keyframes electron-5-6{
+    from {
+        transform: rotate(240deg)
+        translate(28px)
+        rotate(0deg);
+    }
+    to {
+        transform: rotate(600deg)
+        translate(28px)
+        rotate(-360deg);
+    }
 }
-.level .electron.nr-6.count-6 {
-    animation: electron-6-6 5s infinite linear;
+@-webkit-keyframes electron-6-6{
+    from {
+        transform: rotate(300deg)
+        translate(28px)
+        rotate(0deg);
+    }
+    to {
+        transform: rotate(660deg)
+        translate(28px)
+        rotate(-360deg);
+    }
 }
-.level .link {
-    position: absolute;
+
+.level .electron.nr-1{
+    -webkit-animation:electron-1 5s infinite linear;
+    -moz-animation:electron-1 5s infinite linear;
+    -ms-animation:electron-1 5s infinite linear;
+    -o-animation:electron-1 5s infinite linear;
+    animation:electron-1 5s infinite linear;
+}
+.level .electron.nr-2.count-2,.level .electron.nr-2.count-4,.level .electron.nr-4.count-6{
+    -webkit-animation:electron-2-2 5s infinite linear;
+    -moz-animation:electron-2-2 5s infinite linear;
+    -ms-animation:electron-2-2 5s infinite linear;
+    -o-animation:electron-2-2 5s infinite linear;
+    animation:electron-2-2 5s infinite linear;
+}
+.level .electron.nr-2.count-3{
+    -webkit-animation:electron-2-3 5s infinite linear;
+    -moz-animation:electron-2-3 5s infinite linear;
+    -ms-animation:electron-2-3 5s infinite linear;
+    -o-animation:electron-2-3 5s infinite linear;
+    animation:electron-2-3 5s infinite linear;
+}
+.level .electron.nr-3.count-3{
+    -webkit-animation:electron-3-3 5s infinite linear;
+    -moz-animation:electron-3-3 5s infinite linear;
+    -ms-animation:electron-3-3 5s infinite linear;
+    -o-animation:electron-3-3 5s infinite linear;
+    animation:electron-3-3 5s infinite linear;
+}
+.level .electron.nr-3.count-4{
+    -webkit-animation:electron-3-4 5s infinite linear;
+    -moz-animation:electron-3-4 5s infinite linear;
+    -ms-animation:electron-3-4 5s infinite linear;
+    -o-animation:electron-3-4 5s infinite linear;
+    animation:electron-3-4 5s infinite linear;
+}
+.level .electron.nr-4.count-4{
+    -webkit-animation:electron-4-4 5s infinite linear;
+    -moz-animation:electron-4-4 5s infinite linear;
+    -ms-animation:electron-4-4 5s infinite linear;
+    -o-animation:electron-4-4 5s infinite linear;
+    animation:electron-4-4 5s infinite linear;
+}
+.level .electron.nr-2.count-5{
+    -webkit-animation:electron-2-5 5s infinite linear;
+    -moz-animation:electron-2-5 5s infinite linear;
+    -ms-animation:electron-2-5 5s infinite linear;
+    -o-animation:electron-2-5 5s infinite linear;
+    animation:electron-2-5 5s infinite linear;
+}
+.level .electron.nr-3.count-5{
+    -webkit-animation:electron-3-5 5s infinite linear;
+    -moz-animation:electron-3-5 5s infinite linear;
+    -ms-animation:electron-3-5 5s infinite linear;
+    -o-animation:electron-3-5 5s infinite linear;
+    animation:electron-3-5 5s infinite linear;
+}
+.level .electron.nr-4.count-5{
+    -webkit-animation:electron-4-5 5s infinite linear;
+    -moz-animation:electron-4-5 5s infinite linear;
+    -ms-animation:electron-4-5 5s infinite linear;
+    -o-animation:electron-4-5 5s infinite linear;
+    animation:electron-4-5 5s infinite linear;
+}
+.level .electron.nr-5.count-5{
+    -webkit-animation:electron-5-5 5s infinite linear;
+    -moz-animation:electron-5-5 5s infinite linear;
+    -ms-animation:electron-5-5 5s infinite linear;
+    -o-animation:electron-5-5 5s infinite linear;
+    animation:electron-5-5 5s infinite linear;
+}
+.level .electron.nr-2.count-6{
+    -webkit-animation:electron-2-6 5s infinite linear;
+    -moz-animation:electron-2-6 5s infinite linear;
+    -ms-animation:electron-2-6 5s infinite linear;
+    -o-animation:electron-2-6 5s infinite linear;
+    animation:electron-2-6 5s infinite linear;
+}
+.level .electron.nr-3.count-6{
+    -webkit-animation:electron-3-6 5s infinite linear;
+    -moz-animation:electron-3-6 5s infinite linear;
+    -ms-animation:electron-3-6 5s infinite linear;
+    -o-animation:electron-3-6 5s infinite linear;
+    animation:electron-3-6 5s infinite linear;
+}
+.level .electron.nr-5.count-6{
+    -webkit-animation:electron-5-6 5s infinite linear;
+    -moz-animation:electron-5-6 5s infinite linear;
+    -ms-animation:electron-5-6 5s infinite linear;
+    -o-animation:electron-5-6 5s infinite linear;
+    animation:electron-5-6 5s infinite linear;
+}
+.level .electron.nr-6.count-6{
+    -webkit-animation:electron-6-6 5s infinite linear;
+    -moz-animation:electron-6-6 5s infinite linear;
+    -ms-animation:electron-6-6 5s infinite linear;
+    -o-animation:electron-6-6 5s infinite linear;
+    animation:electron-6-6 5s infinite linear;
+}
+.level .link{
+    position:absolute;
     height:0px;
     border:2px solid #dadada;
 }
-.level .link.red {
-    border-color: #e30613;
+.level .link.red{
+    border-color:#e30613;
 }
-.level .link.green {
-    border-color: #009640;
+.level .link.green{
+    border-color:#009640;
 }
-.level .atom .menu {
-    position: absolute;
+.level .atom .menu{
+    position:absolute;
     top:50px;
     left:60px;
     width:150px;
     z-index:300;
     background:#fff;
-    text-align: center;
-
+    text-align:center;
 }
-.level .atom .menu li {
-    color: #333;
-    font-size: 14px;
-    line-height: 25px;
-    text-shadow: none;
-    cursor: pointer;
+.level .atom .menu li{
+    color:#333;
+    font-size:14px;
+    line-height:25px;
+    text-shadow:none;
+    cursor:pointer;
 }
-.level .atom .menu li:hover {
+.level .atom .menu li:hover{
     background:#eee;
 }
-.level .atom .menu li.close {
+.level .atom .menu li.close{
     background:#fff;
-    border: 3px solid;
-    border-radius: 20px;
-    font-size: 15px;
-    font-weight: bold;
-    height: 20px;
-    line-height: 20px;
-    position: absolute;
-    right: -13px;
-    top: -14px;
-    width: 20px;
+    border:3px solid;
+    -webkit-border-radius:20px;
+    -moz-border-radius:20px;
+    border-radius:20px;
+    font-size:15px;
+    font-weight:bold;
+    height:20px;
+    line-height:20px;
+    position:absolute;
+    right:-13px;
+    top:-14px;
+    width:20px;
 }
