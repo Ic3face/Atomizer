@@ -1,8 +1,57 @@
-/*DUDEMASTER*/
+/*BENSONMASTER*/
+
+.start {
+   /* height: 100%; // needs to be inline to get height in js */
+    text-align: center;
+    font-size: 0;
+}
 
 .start .atom {
     background:url(../resources/img/atom-sprite.jpg);
-    display: inline-block;
     height: 45px;
     width: 45px;
+
+    vertical-align: top;
+    display: inline-block;
+    zoom: 1;
+    margin: 60px;
 }
+
+.start img.logo{
+    z-index: 1;
+    width: 300px;
+    height: 200px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -150px;
+    margin-top: -150px;
+}
+
+/* floating space Animation */
+@-webkit-keyframes floating {
+    from {
+        transform: rotate(0deg)
+        translate(28px)
+        rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg)
+        translate(28px)
+        rotate(-360deg);
+    }
+}
+
+@keyframes floating {
+    from {
+        transform: rotate(0deg)
+        translate(28px)
+        rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg)
+        translate(28px)
+        rotate(-360deg);
+    }
+}
+
