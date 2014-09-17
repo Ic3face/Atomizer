@@ -51,5 +51,26 @@ function initStart(){
 
 }
 
+function pageTransition(){
+    jQuery('img.logo, span.button').animate({
+        height: ($(this).height()*0),
+        width: ($(this).width()*0),
+        "font-size": 0,
+        opacity: 0
+    }, 500, function(){
+        // TODO elemnts fly out
+        window.location = '#/menu';
+    });
+
+
+    console.log("Hello");
+
+}
+
 
 initStart();
+
+jQuery('a').on("click", function( event ) {
+    event.preventDefault();
+    pageTransition();
+});
