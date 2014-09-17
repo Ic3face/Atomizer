@@ -1,10 +1,36 @@
 /* Level CSS */
+.popup {
+    background: rgba(0, 0, 0, 0.4);
+    height: 100vh;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 3000;
+    display: none;
+}
+.popup .box {
+    background: #494949;
+    border: 1px solid #fff;
+    height: 150px;
+    left: 50%;
+    margin: -85px 0 0 -160px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    width: 300px;
+    padding:10px;
+}
+.popup .box .content {
+    font-family: kirsten;
+    color:#fff;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    margin:20px 0;
+}
 .level .left-col{
     float:left;
     height:700px;
     width:150px;
-    background:#6b6b6b;
-    border:1px solid #fff;
     margin-right:20px;
     position:relative;
 }
@@ -12,17 +38,17 @@
     float:left;
     height:700px;
     width:826px;
-    background:#4a4a4a;
-    border:1px solid #fff;
 }
 .level .right-col{
     float:left;
-    height:700px;
     width:178px;
-    background:#6b6b6b;
-    border:1px solid #fff;
     margin-left:20px;
     color:#fff;
+}
+.level-info {
+    border: 1px solid #fff;
+    margin-bottom: 20px;
+    height: 650px;
 }
 .level .right-col ul li{
     margin:10px;
@@ -32,24 +58,37 @@
     text-align:center;
 }
 .left-col .actions{
-    position:absolute;
-    top:0;
-    left:0;
+    margin-bottom: 10px;
 }
-.left-col .actions span{
-    background:#ddd;
-    display:inline-block;
+.left-col .actions span, .hint, .back, .popup .button span{
+    font-family: kirsten;
+    background:#df7d1b;
+    display:block;
     height:30px;
     line-height:30px;
     text-align:center;
-    width:73px;
     cursor:pointer;
+    margin-bottom:10px;
+    color:#fff;
+    text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.6);
 }
-.left-col .actions span.active{
-    background:#f00;
+.popup .button span {
+    width:150px;
+    margin:10px auto;
+}
+.hint{
+    margin:10px 0 20px 0;
+}
+.left-col .actions span.active, .left-col .actions span:hover, .hint:hover, .back:hover, .popup .button span:hover {
+    background:#14748a;
+}
+.left-col .actions span.active:hover {
+    background:#df7d1b;
 }
 .level-menu{
-    margin-top:40px;
+    border:1px solid #fff;
+    height: 619px;
+    overflow: auto;
 }
 .level-menu li{
     width:100%;

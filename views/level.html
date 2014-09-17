@@ -1,9 +1,18 @@
 <div class="level">
     <div id="mousefollower"></div>
+    <div class="popup">
+        <div class="overlay"></div>
+        <div class="box">
+            <div class="content">Das ist ein Testtext, du hast was falsch gemacht!</div>
+            <div class="button">
+                <span onclick="jQuery('.popup').hide();" >OK</span>
+            </div>
+        </div>
+    </div>
     <div class="left-col">
         <div class="actions">
-            <span class="toggleLinkMode" onclick="toggleLinkMode();">LINK</span>
-            <span class="toggleDeleteMode" onclick="toggleDeleteMode();">DELETE</span>
+            <span class="toggleLinkMode" onclick="toggleLinkMode();">Link Atoms</span>
+            <span class="toggleDeleteMode" onclick="toggleDeleteMode();">Delete Atoms</span>
         </div>
         <ul class="level-menu">
             <li ng-repeat="atom in atoms" ng-click="getElement(atom.sign,atom.free,atom.color)" >
@@ -17,9 +26,10 @@
     <div class="right-col">
         <ul class="level-info">
             <li class="name">{{task.name}}</li>
-            <li class="hint">{{task.hint}}</li>
+            <li class="hint"><span class="hint" hint="{{task.hint}}">Hint</span></li>
             <li class="desc">{{task.desc}}</li>
         </ul>
+        <span class="back">Back to Menu</span>
     </div>
 </div>
 

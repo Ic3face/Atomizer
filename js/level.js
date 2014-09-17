@@ -8,6 +8,9 @@ var linkMode = false;
 var deleteMode = false;
 var mousefollower = jQuery('#mousefollower');
 
+var clickSound = new Audio('resources/sounds/click.mp3');
+var deleteSound = new Audio('resources/sounds/delete.mp3');
+var linkSound = new Audio('resources/sounds/link.mp3');
 
 function initPlayground() {
     var playground = jQuery('#playground');
@@ -51,6 +54,7 @@ jQuery(document).bind('mousemove', function(e) {
 });
 
 function toggleLinkMode() {
+    clickSound.play();
     firstAtom = '';
     secondAtom = '';
     jQuery('.firstAtom').removeClass('firstAtom');
@@ -67,6 +71,7 @@ function toggleLinkMode() {
 }
 
 function toggleDeleteMode() {
+    clickSound.play();
     firstAtom = '';
     secondAtom = '';
     jQuery('.firstAtom').removeClass('firstAtom');
@@ -257,6 +262,7 @@ function deleteAtom(e) {
         }
 
     }
+    deleteSound.play();
     checkWin();
 }
 
@@ -350,6 +356,7 @@ function buildLink() {
 
     //Die neue Verbindung Zeichnen
     drawLink(x1,y1,x2,y2, true);
+    linkSound.play();
 
     //Verbindung in das Verbindungsarray Eintragen
 
@@ -434,6 +441,7 @@ function buildDoppelLink() {
 
     //Die neue Verbindung Zeichnen
     drawLink(x1,y1,x2,y2, true);
+    linkSound.play();
 
     links.push([
         firstAtom.attr('sign')+secondAtom.attr('sign'),
@@ -453,7 +461,8 @@ function buildDoppelLink() {
 }
 
 function cancelLink(error) {
-    alert(error);
+    jQuery('.popup').show();
+    jQuery('.popup .content').html(error);
     firstAtom = '';
     secondAtom = '';
     jQuery('.firstAtom').removeClass('firstAtom');
