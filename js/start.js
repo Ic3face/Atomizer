@@ -10,10 +10,11 @@ function shuffle(o){ //v1.0
 * adds elements to start
 */
 function initStart(){
-    var atomArray = [];
     var $start = jQuery('.start');
+    var atomArray = [];
+    var arrayLength;
 
-    // fill atomArray with atoms
+    // create atoms and fill atomArray
         for(var i = 0; i < 20; i++) { // vom Dudemeister!!
         var atom = document.createElement("div");
         var atomStyle = 'background-position: ' + i*-45 + 'px 0;';
@@ -23,16 +24,28 @@ function initStart(){
         atomArray.push(atom);
     }
 
+    // shuffle Array
+    arrayLength = atomArray.length;
     var shuffledArray = shuffle(atomArray);
 
-    // add atoms in random Order
-    for(var i = 0; i < shuffledArray.length; i++) {
-        // absolut positionieren
-        $start.append(shuffledArray[i]);
+    // add randomized atoms with anima[i] class
+    for(var i = 0; i < arrayLength; i++) {
+        var randDuration = Math.floor((Math.random() * 8) + 5);
+        var randDelay = Math.floor((Math.random() * 10) + 0);
+
+        var cssArray = { animation: "floating " + randDuration + "s linear -"+ randDelay +"s infinite",
+               "-webkit-animation": "floating " + randDuration + "s linear -"+ randDelay +"s infinite" };
+        jQuery(shuffledArray[i]).css(cssArray).appendTo($start);
     }
 
+    // set margin to fit area
+    var area = $start.height()*1200;
+    var areaAtoms = 45*45*arrayLength;
 
-    // spread evenly over screen max -width: 1200px
+    var diff = (area-areaAtoms)/arrayLength;
+    var atomMargin = Math.sqrt(diff)/2.8;
+
+    jQuery('.atom').css('margin',atomMargin);
 
     
 
