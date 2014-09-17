@@ -53,6 +53,14 @@ jQuery(document).bind('mousemove', function(e) {
     });
 });
 
+window.onkeypress = function(e) {
+    if (e.which == 108 ){
+        toggleLinkMode();
+    } else if(e.which == 100 ) {
+        toggleDeleteMode();
+    }
+}
+
 function toggleLinkMode() {
     clickSound.play();
     firstAtom = '';
@@ -92,6 +100,7 @@ function getElement(sign,free,color) {
     linkMode = false;
     deleteMode = false;
     firstAtom = '';
+    clickSound.play();
     jQuery('.firstAtom').removeClass('firstAtom');
     jQuery('.toggleLinkMode').removeClass('active');
     jQuery('.toggleDeleteMode').removeClass('active');
@@ -108,6 +117,7 @@ function getElement(sign,free,color) {
 
 function clickTile(e) {
     if(mousefollower.html() != '' && jQuery(e.target).hasClass('tile')) {
+        clickSound.play();
         jQuery(e.target).html(mousefollower.html());
         jQuery('#mousefollower').html('');
     }

@@ -79,11 +79,8 @@
 .hint{
     margin:10px 0 20px 0;
 }
-.left-col .actions span.active, .left-col .actions span:hover, .hint:hover, .back:hover, .popup .button span:hover {
+.left-col .actions span.active{
     background:#14748a;
-}
-.left-col .actions span.active:hover {
-    background:#df7d1b;
 }
 .level-menu{
     border:1px solid #fff;
