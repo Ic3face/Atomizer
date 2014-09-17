@@ -456,6 +456,7 @@ function cancelLink(error) {
     alert(error);
     firstAtom = '';
     secondAtom = '';
+    jQuery('.firstAtom').removeClass('firstAtom');
 }
 
 function drawLink(x1, y1, x2, y2, permenant){
