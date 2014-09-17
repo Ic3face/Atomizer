@@ -1,3 +1,9 @@
+@font-face {
+    font-family: 'kirsten';
+    src: url( ../resources/fonts/Kristen-ITC-Regular.ttf);
+    url('../resources/img/Kristen-ITC-Regular.ttf') format('truetype');             /* Moderne Browser */
+}
+
 * {
     margin:0;
     padding:0;
