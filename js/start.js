@@ -51,6 +51,7 @@ function initStart(){
 
 }
 
+
 function pageTransition(){
     jQuery('img.logo, span.button').animate({
         height: ($(this).height()*0),

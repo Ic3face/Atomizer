@@ -8,6 +8,9 @@ var linkMode = false;
 var deleteMode = false;
 var mousefollower = jQuery('#mousefollower');
 
+var clickSound = new Audio('resources/sounds/click.mp3');
+var deleteSound = new Audio('resources/sounds/delete.mp3');
+var linkSound = new Audio('resources/sounds/link.mp3');
 
 function initPlayground() {
     var playground = jQuery('#playground');
@@ -50,7 +53,16 @@ jQuery(document).bind('mousemove', function(e) {
     });
 });
 
+window.onkeypress = function(e) {
+    if (e.which == 108 ){
+        toggleLinkMode();
+    } else if(e.which == 100 ) {
+        toggleDeleteMode();
+    }
+}
+
 function toggleLinkMode() {
+    clickSound.play();
     firstAtom = '';
     secondAtom = '';
     jQuery('.firstAtom').removeClass('firstAtom');
@@ -67,6 +79,7 @@ function toggleLinkMode() {
 }
 
 function toggleDeleteMode() {
+    clickSound.play();
     firstAtom = '';
     secondAtom = '';
     jQuery('.firstAtom').removeClass('firstAtom');
@@ -87,6 +100,7 @@ function getElement(sign,free,color) {
     linkMode = false;
     deleteMode = false;
     firstAtom = '';
+    clickSound.play();
     jQuery('.firstAtom').removeClass('firstAtom');
     jQuery('.toggleLinkMode').removeClass('active');
     jQuery('.toggleDeleteMode').removeClass('active');
@@ -103,6 +117,7 @@ function getElement(sign,free,color) {
 
 function clickTile(e) {
     if(mousefollower.html() != '' && jQuery(e.target).hasClass('tile')) {
+        clickSound.play();
         jQuery(e.target).html(mousefollower.html());
         jQuery('#mousefollower').html('');
     }
@@ -257,6 +272,7 @@ function deleteAtom(e) {
         }
 
     }
+    deleteSound.play();
     checkWin();
 }
 
@@ -350,6 +366,7 @@ function buildLink() {
 
     //Die neue Verbindung Zeichnen
     drawLink(x1,y1,x2,y2, true);
+    linkSound.play();
 
     //Verbindung in das Verbindungsarray Eintragen
 
@@ -434,6 +451,7 @@ function buildDoppelLink() {
 
     //Die neue Verbindung Zeichnen
     drawLink(x1,y1,x2,y2, true);
+    linkSound.play();
 
     links.push([
         firstAtom.attr('sign')+secondAtom.attr('sign'),
@@ -453,7 +471,8 @@ function buildDoppelLink() {
 }
 
 function cancelLink(error) {
-    alert(error);
+    jQuery('.popup').show();
+    jQuery('.popup .content').html(error);
     firstAtom = '';
     secondAtom = '';
     jQuery('.firstAtom').removeClass('firstAtom');

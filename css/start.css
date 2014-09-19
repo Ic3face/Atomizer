@@ -4,23 +4,19 @@
    /* height: 100%; // needs to be inline to get height in js */
     text-align: center;
     font-size: 0;
-    position: relative;
-}
-
-.start a {
-    text-decoration: none;
 }
 
 .start .overlay {
-    z-index: 1;
     width: 100%;
     height:100%;
+    z-index: 2;
     top: 0;
     left: 0;
 
     background: rgba(80, 80, 80, 0.56);
     position: fixed;
 }
+
 
 .start img.logo{
     z-index: 1;
@@ -62,6 +58,7 @@
     zoom: 1;
     margin: 60px;
 }
+
 
 /* fly outside of view */
 .start .atom.flyOut{
