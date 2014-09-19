@@ -22,6 +22,16 @@
     position: fixed;
 }
 
+.start img.logo{
+    z-index: 1;
+    width: 600px;
+
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+}
+
 .start span.button {
     z-index: 2;
     font-family: kirsten, serif;
@@ -36,6 +46,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
 .start span.button:hover {
     z-index: 2;
     background: #14748a;
@@ -52,14 +63,10 @@
     margin: 60px;
 }
 
-.start img.logo{
-    z-index: 1;
-    width: 600px;
-
-    position: fixed;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -60%);
+/* fly outside of view */
+.start .atom.flyOut{
+    -webkit-transform: translateY(-10000px) !important;
+    transform: translateY(-10000px) !important;
 }
 
 /* floating space Animation */
@@ -88,4 +95,5 @@
         rotate(-360deg);
     }
 }
+
 

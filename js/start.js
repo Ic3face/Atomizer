@@ -58,12 +58,16 @@ function pageTransition(){
         "font-size": 0,
         opacity: 0
     }, 500, function(){
-        // TODO elemnts fly out
-        window.location = '#/menu';
+        jQuery('.atom').css("-webkit-animation","none").animate({
+
+            transform: "translate(-1000px, 10000px)"
+            // TODO elemnts fly out
+        }, 500, function(){
+                window.location = '#/menu';
+            });
+
+
     });
-
-
-    console.log("Hello");
 
 }
 
