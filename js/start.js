@@ -1,23 +1,29 @@
-/*
-* shuffle Array
- */
+// set global elements
+var $atom, $overlay = jQuery('div.overlay'), $logoButton =  jQuery('img.logo, span.button');
+
+/**
+ *   shuffles Array
+ **/
 function shuffle(o){ //v1.0
     for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
     return o;
 }
 
-/*
-* adds elements to start
-*/
+/**
+ *   initStart
+ *   appends .atom elements into .start
+ *   calculates margin between atoms
+ *   fade in effects
+ **/
 function initStart(){
     var $start = jQuery('.start');
     var atomArray = [];
     var arrayLength;
 
     // create atoms and fill atomArray
-        for(var i = 0; i < 20; i++) { // vom Dudemeister!!
+        for(var i = 0; i < 83; i++) { // vom Dudemeister!!
         var atom = document.createElement("div");
-        var atomStyle = 'background-position: ' + i*-45 + 'px 0;';
+        var atomStyle = 'background-position: ' + i*-45 + 'px 0; opacity: 0';
         atom.setAttribute('class', 'atom');
         atom.setAttribute('style', atomStyle);
 
@@ -38,41 +44,49 @@ function initStart(){
         jQuery(shuffledArray[i]).css(cssArray).appendTo($start);
     }
 
-    // set margin to fit area
+    $atom = jQuery('.atom');
+    // fade in elements
+    $atom.delay(1000).animate({opacity: 1 }, 500);
+    $overlay.delay(1500).animate({ opacity: 1}, 500);
+    $logoButton.slideUp(0).delay(1500).slideDown(500)
+
+    // set margin to fit area size
     var area = $start.height()*1200;
     var areaAtoms = 45*45*arrayLength;
 
     var diff = (area-areaAtoms)/arrayLength;
-    var atomMargin = Math.sqrt(diff)/2.8;
+    var atomMargin = Math.sqrt(diff)/3.5;
 
-    jQuery('.atom').css('margin',atomMargin);
-
-    
+    $atom.css('margin',atomMargin);
 
 }
 
-
+/**
+ *   pageTransition
+ *   fly out effects for .atom elements and redirect to #/menu
+**/
 function pageTransition(){
-    jQuery('img.logo, span.button').animate({
+    // Problem: css animationen nicht stapelbar (Plugin: http://labs.bigroomstudios.com/libraries/animo-js )
+    // animation: none --> elemets jump back to start
+
+    $overlay.animate({ opacity: 0}, 500);
+    $logoButton.animate({
         height: ($(this).height()*0),
         width: ($(this).width()*0),
         "font-size": 0,
         opacity: 0
     }, 500, function(){
-        jQuery('.atom').css("-webkit-animation","none").animate({
-
-            transform: "translate(-1000px, 10000px)"
-            // TODO elemnts fly out
+        $atom.animate({
+            top: screen.height
         }, 500, function(){
-                window.location = '#/menu';
-            });
-
+            window.location = '#/menu';
+        });
 
     });
 
 }
 
-
+/*---  function calls ---*/
 initStart();
 
 jQuery('a').on("click", function( event ) {
