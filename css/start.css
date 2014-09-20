@@ -1,5 +1,4 @@
 /* Startscreen CSS */
-
 .start {
     text-align: center;
     font-size: 0;
@@ -37,7 +36,7 @@
     font-family: kirsten, serif;
     color: #fff;
     background: #df7d1b;
-    transition: background .5s;
+    transition: background ease .5s;
     text-shadow: 3px 3px 4px rgba(0,0,0,0.6);
     font-size: 25px;
     padding: 5px 20px;

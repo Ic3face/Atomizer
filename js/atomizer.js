@@ -1,3 +1,7 @@
+/*  atomizer main
+ *  angular routing, controller
+ * */
+
 var atomizerApp = angular.module('atomizerApp', ['ngRoute']);
 
 atomizerApp.config(['$routeProvider', function(routeProvider) {
@@ -29,7 +33,8 @@ atomizerApp.controller('StartCtrl', ['$scope', function(scope) {
 }]);
 
 atomizerApp.controller('MenuCtrl', ['$scope', function(scope) {
-
+    jQuery('.menu').append('<link rel="stylesheet" href="css/menu.css" />');
+    jQuery('.menu').append('<script src="js/menu.js"></script>');
 }]);
 
 atomizerApp.controller('LevelCtrl', ['$scope', '$routeParams', '$http', function(scope, routeParams, http) {

@@ -1,3 +1,7 @@
+/* Start Screen functions
+*  generating Elements, fade in, fade out page transition
+* */
+
 // set global elements
 var $atom, $overlay = jQuery('div.overlay'), $logoButton =  jQuery('img.logo, span.button');
 
