@@ -7,7 +7,9 @@
 /**
  * Deklarieren von Globalenvariablen
  */
-var scene, camera, renderer, uhr, stats;
+var scene, camera, renderer, uhr, stats, projector;
+
+var container;
 
 var objects = [];
 
@@ -16,8 +18,12 @@ camera = new THREE.PerspectiveCamera(75, 800/600, 0.1, 1000);
 renderer = new THREE.WebGLRenderer();
 uhr = new THREE.Clock();
 stats = new Stats();
+projector = new THREE.Projector();
 stats.domElement.style.position = 'absolute';
 stats.domElement.style.bottom = '10px';
+container = document.createElement( 'div' );
+container
+document.body.appendChild( container );
 
 /**
  * Hilfsvariable für die Zeit zwischen jedem Frame
@@ -77,65 +83,17 @@ scene.add(skyBoxMesh);
 scene.add(directionalLight); 
 
 
-document.addEventListener("keypress", function(e){
-	if(e.key == "w"){
-		camera.rotation.x += (delta * 50 * Math.PI / 180);
-	}
-	if(e.key == "s"){
-		camera.rotation.x -= (delta * 50 * Math.PI / 180);
-	}
-	if(e.key == "a"){
-		camera.rotation.y += (delta * 50 * Math.PI / 180);
-	}
-	if(e.key == "d"){
-		camera.rotation.y -= (delta * 50 * Math.PI / 180);
-	}
- });
-
 
 /**
  * Rendergröße festlegen und einfügen des Renderers in die DOM
  */
 renderer.setSize(800, 600);
-document.body.appendChild(renderer.domElement);
-document.body.appendChild( stats.domElement );
+renderer.domElement.id = "view";
+container.appendChild(renderer.domElement);
+container.appendChild( stats.domElement );
 
-/**
- * Probe
- */
-document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+document.addEventListener( 'mousedown', klicksteuerung, false );
 
-var projector = new THREE.Projector();
-
-function onDocumentMouseDown( event ) {
-
-	event.preventDefault();
-
-	var vector = new THREE.Vector3( ( event.clientX / 800 ) * 2 - 1, - ( event.clientY / 600 ) * 2 + 1, 0.5 );
-	projector.unprojectVector( vector, camera );
-
-	var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
-
-	var intersects = raycaster.intersectObjects( objects );
-
-	if ( intersects.length > 0 ) {
-
-		intersects[ 0 ].object.material.color.setHex( Math.random() * 0xffffff );
-
-	}
-
-	/*
-	// Parse all the faces
-	for ( var i in intersects ) {
-
-		intersects[ i ].face.material[ 0 ].color.setHex( Math.random() * 0xffffff | 0x80000000 );
-
-	}
-	*/
-}
-/**
- * Probe ENDE
- */
 
 /**
  * Erstellen der Renderfunktion die immer wieder durchlaufen wird?
@@ -175,6 +133,35 @@ function skyboxladen() {
 	var skyBox = new THREE.Mesh( skyGeometry, skyMaterial );
 	
 	return skyBox;
+}
+
+/**
+ * Funktion
+ * 
+ * @param event
+ */
+function klicksteuerung( event ) {
+
+	event.preventDefault();
+	
+	var clientXprobe = document.getElementById("view").offsetTop;
+	var clientYprobe = document.getElementById("view").offsetLeft;
+	var clientXkoort = event.clientX;
+	var clientYkoort = event.clientY;	
+	
+	var vector = new THREE.Vector3( ( (event.clientX - clientYprobe) / 800 ) * 2 - 1, - ( (event.clientY - clientXprobe) / 600 ) * 2 + 1, 0.5 );
+	projector.unprojectVector( vector, camera );
+
+	var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+
+	var intersects = raycaster.intersectObjects( objects );
+
+	if ( intersects.length > 0 ) {
+
+		intersects[ 0 ].object.material.color.setHex( Math.random() * 0xffffff );
+
+	}
+
 }
 
 
