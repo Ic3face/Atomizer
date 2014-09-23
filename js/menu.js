@@ -50,7 +50,22 @@ function initMenu(){
 
 }
 
+/**
+ *   setActive
+ *   adds active class to sub-menu
+ **/
+function setActive (el){
+    jQuery('nav#level li').removeClass('active');
+    el.parent().addClass('active');
+}
+
 /*---  function calls ---*/
 initMenu();
+jQuery('nav#level a[href="#"]').on('click', function(event){
+    event.preventDefault();
+    setActive(jQuery(this));
+});
+
+
 
 
