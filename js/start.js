@@ -3,7 +3,8 @@
 * */
 
 // set global elements
-var $atom, $overlay = jQuery('div.overlay'), $logoButton =  jQuery('img.logo, span.button');
+var $atom, $overlay = jQuery('div.overlay');
+var VecX,VecY;
 
 /**
  *   shuffles Array
@@ -11,6 +12,16 @@ var $atom, $overlay = jQuery('div.overlay'), $logoButton =  jQuery('img.logo, sp
 function shuffle(o){ //v1.0
     for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
     return o;
+}
+
+/**
+ *   normalizeVector
+ *   shortens Vector to normal length 1
+ **/
+function normalizeVector (){
+    var lengthVec = Math.sqrt((VecX*VecX+VecY*VecY));
+    VecX = VecX/lengthVec;
+    VecY = VecY/lengthVec;
 }
 
 /**
@@ -25,7 +36,7 @@ function initStart(){
     var arrayLength;
 
     // create atoms and fill atomArray
-        for(var i = 0; i < 83; i++) { // vom Dudemeister!!
+        for(var i = 0; i < 83; i++) {
         var atom = document.createElement("div");
         var atomStyle = 'background-position: ' + i*-45 + 'px 0; opacity: 0';
         atom.setAttribute('class', 'atom');
@@ -49,10 +60,17 @@ function initStart(){
     }
 
     $atom = jQuery('.atom');
-    // fade in elements
+    /** fade in elements **/
     $atom.delay(1000).animate({opacity: 1 }, 500);
     $overlay.delay(1500).animate({ opacity: 1}, 500);
-    $logoButton.slideUp(0).delay(1500).slideDown(500)
+    jQuery('img.logo').delay(1500).animate({
+        top: "40%"
+        }, 500, function(){
+            jQuery('span.button').animate({
+                opacity: 1
+            }, 300);
+    });
+
 
     // set margin to fit area size
     var area = $start.height()*1200;
@@ -73,18 +91,35 @@ function pageTransition(){
     // Problem: css animationen nicht stapelbar (Plugin: http://labs.bigroomstudios.com/libraries/animo-js )
     // animation: none --> elemets jump back to start
 
+    var atomOffset;
+    var wrapperWidth = jQuery('.wrapper').width()/2 // Mittelpunkt berechnen
+    var wrapperHeight= jQuery('.wrapper').height()/2;
+
     $overlay.animate({ opacity: 0}, 500);
-    $logoButton.animate({
+    jQuery('img.logo, span.button').animate({
         height: ($(this).height()*0),
         width: ($(this).width()*0),
         "font-size": 0,
         opacity: 0
     }, 500, function(){
-        $atom.animate({
-            top: screen.height
-        }, 500, function(){
-            window.location = '#/menu';
-        });
+        $atom.each(function(){
+            atomOffset = jQuery(this).offset();
+
+            //Vekor ermitteln
+            VecX = wrapperWidth - atomOffset.left;
+            VecY = wrapperHeight - atomOffset.top;
+
+            normalizeVector();
+
+            jQuery(this).animate({
+                position: "relative",
+                top:   1000*-VecY,
+                left:  1000*-VecX
+
+                }, 1000, function(){
+                window.location = '#/menu';
+            });
+     });
 
     });
 
