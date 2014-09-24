@@ -1,8 +1,8 @@
 /* Startscreen CSS */
 .start {
+    position: relative;
     text-align: center;
     font-size: 0;
-    position: relative;
 }
 
 .start a {
@@ -10,24 +10,23 @@
 }
 
 .start .overlay {
-    z-index: 1;
-    width: 100%;
-    height:100%;
+    position: fixed;
     top: 0;
     left: 0;
-    opacity: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
 
     background: rgba(80, 80, 80, 0.56);
-    position: fixed;
+    opacity: 0;
 }
 
-.start img.logo{
-    z-index: 1;
-    width: 600px;
-
+.start img.logo {
     position: fixed;
     top: -300px;
     left: 50%;
+    z-index: 1;
+    width: 600px;
     transform: translate(-50%, -60%);
 }
 
@@ -37,16 +36,14 @@
     color: #fff;
     background: #df7d1b;
     transition: background ease .5s;
-    text-shadow: 3px 3px 4px rgba(0,0,0,0.6);
+    text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.6);
     font-size: 25px;
     padding: 5px 20px;
     opacity: 0;
-
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
 
 }
 
@@ -56,41 +53,33 @@
 }
 
 .start .atom {
-    background:url(../resources/img/atom-sprite.jpg);
-    height: 45px;
-    width: 45px;
-
-    vertical-align: top;
-    display: inline-block;
-    zoom: 1;
-    margin: 60px;
     position: relative;
+    display: inline-block;
+    margin: 60px;
+
+    width: 45px;
+    height: 45px;
+    background: url(../resources/img/atom-sprite.jpg);
+    vertical-align: top;
+    zoom: 1;
 }
 
 /* Elements floating  animation */
 @-webkit-keyframes floating {
     from {
-        transform: rotate(0deg)
-        translate(16px)
-        rotate(0deg);
+        transform: rotate(0deg) translate(16px) rotate(0deg);
     }
     to {
-        transform: rotate(360deg)
-        translate(16px)
-        rotate(-360deg);
+        transform: rotate(360deg) translate(16px) rotate(-360deg);
     }
 }
 
 @keyframes floating {
     from {
-        transform: rotate(0deg)
-        translate(16px)
-        rotate(0deg);
+        transform: rotate(0deg) translate(16px) rotate(0deg);
     }
     to {
-        transform: rotate(360deg)
-        translate(16px)
-        rotate(-360deg);
+        transform: rotate(360deg) translate(16px) rotate(-360deg);
     }
 }
 

@@ -66,7 +66,7 @@ function initStart(){
     jQuery('img.logo').delay(1500).animate({
         top: "40%"
         }, 500, function(){
-            jQuery('span.button').animate({
+            jQuery('span.button').delay(200).animate({
                 opacity: 1
             }, 300);
     });
