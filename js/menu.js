@@ -3,7 +3,30 @@
  * */
 
 var $submenu = jQuery('.submenu');
-var left
+var left;
+
+//// getting all levels existing from backend ??"?"
+//var allLevel = [
+//    {"stage11":"done", "stage12":"done", "stage13":"done"},
+//    {"stage11":"John", "stage12":"Doe", "stage13":"Doe"},
+//    {"stage11":"John", "stage12":"Doe", "stage13":"Doe"},
+//    {"stage11":"John", "stage12":"Doe", "stage13":"Doe"}
+//];
+//
+//// getting data about user progress separately --> less data per user
+//var userLevel = [
+//    {"stage11":"done", "stage12":"done", "stage13":"done"},
+//    {"stage21":"done", "stage22":"", "stage23":""}
+//];
+
+/**
+ *   initMenu
+ *   fly in effects
+ *   append level menu to html
+ **/
+function initMenu (){
+        // TODO
+}
 
 
 /**
