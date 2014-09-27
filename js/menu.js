@@ -25,6 +25,34 @@ var left;
  *   append level menu to html
  **/
 function initMenu (){
+    var $pseWrapper = jQuery('#pse');
+    var atomArray = [];
+    // create atoms and fill atomArray
+    for(var i = 0; i < 83; i++) {
+        var atom = document.createElement("div");
+        var atomStyle = 'background-position: ' + i*-45 + 'px 0;';// opacity: 0';
+        atom.setAttribute('style', atomStyle);
+        atom.setAttribute('class', 'atom');
+        atom.setAttribute('title', "PSE Nr: "+(i+1));
+
+        atomArray.push(atom);
+    }
+
+    // add atoms
+    // table width = 1200px, margin = 5px, max 18 atoms per row
+    var atomWidth = 45;//px
+    var spacer;
+    for(var i = 0; i < atomArray.length; i++) {
+        spacer = 5;
+        if (i === 1){ // atom n-1
+            spacer = ((atomWidth+10)*16)+5; // (atomWidth + 2*margin)*spaces + margin-left
+        }else if(i === 4 || i === 12){
+            spacer = ((atomWidth+10)*10)+5;
+        }
+        jQuery(atomArray[i]).css({"margin-left": spacer + "px"}).appendTo($pseWrapper);
+    }
+
+
         // TODO
 }
 
@@ -52,24 +80,9 @@ function initMenu (){
  **/
 function appendArrows(){
 
-   console.log(jQuery('nav>ul').offset());
+   //console.log(jQuery('nav>ul').offset());
    var activePosition = jQuery('.submenu li.active div').offset();
-    console.log(activePosition);
-
-}
-
-/**
- *   initMenu
- *   appends level submenu to menu
- *   fade in effect background and footer
- **/
-function initMenu(){
-    //TODO level Menu aus array erstellen je nach Anzahl, dann Pfeile dran :D
-    appendArrows();
-
-    //TODO set .active depending on User progress Save
-
-    //TODO fade in animation
+   // console.log(activePosition);
 
 }
 

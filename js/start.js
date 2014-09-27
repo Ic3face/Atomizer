@@ -36,7 +36,7 @@ function initStart(){
     var arrayLength;
 
     // create atoms and fill atomArray
-        for(var i = 0; i < 83; i++) {
+    for(var i = 0; i < 83; i++) {
         var atom = document.createElement("div");
         var atomStyle = 'background-position: ' + i*-45 + 'px 0; opacity: 0';
         atom.setAttribute('class', 'atom');

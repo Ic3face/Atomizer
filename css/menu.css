@@ -2,8 +2,8 @@
 div.menu {
     position: relative;
     height: 100%;
-    background: url(../resources/img/menu_bg.jpg) no-repeat;
-    background-position: top 250px center;
+    /* background: url(../resources/img/menu_bg.jpg) no-repeat;
+    background-position: top 250px center;  */
 }
 
 img.logo {
@@ -15,6 +15,7 @@ img.logo {
 nav#level {
     position: relative;
     top: 50px;
+    z-index: 1;
 }
 
 nav#level > ul > li > a {
@@ -141,6 +142,28 @@ nav#top-menu ul li a:hover {
 nav#top-menu ul li a:hover > div {
     background: #3e3e3e;
 }
+
+/* periodic system of elements */
+#pse{
+    position: absolute;
+    width: 990px;
+    top: 250px;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+#pse .atom {
+    position: relative;
+    display: inline-block;
+    margin: 5px;
+
+    width: 45px;
+    height: 45px;
+    background: url(../resources/img/atom-sprite.jpg);
+    vertical-align: top;
+    zoom: 1;
+}
+
 
 /* footer menu */
 footer {
