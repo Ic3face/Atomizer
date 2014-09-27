@@ -59,8 +59,8 @@ function initStart(){
         jQuery(shuffledArray[i]).css(cssArray).appendTo($start);
     }
 
+    // fade in elements
     $atom = jQuery('.atom');
-    /** fade in elements **/
     $atom.delay(1000).animate({opacity: 1 }, 500);
     $overlay.delay(1500).animate({ opacity: 1}, 500);
     jQuery('img.logo').delay(1500).animate({
@@ -92,8 +92,9 @@ function pageTransition(){
     // animation: none --> elemets jump back to start
 
     var atomOffset;
-    var wrapperWidth = jQuery('.wrapper').width()/2 // Mittelpunkt berechnen
-    var wrapperHeight= jQuery('.wrapper').height()/2;
+    var $wrapper = jQuery('.wrapper');
+    var wrapperWidth = ($wrapper.width()/2) + $wrapper.offset().left; // calculate center of wrapper pane
+    var wrapperHeight= $wrapper.height()/2;
 
     $overlay.animate({ opacity: 0}, 500);
     jQuery('img.logo, span.button').animate({
@@ -105,7 +106,7 @@ function pageTransition(){
         $atom.each(function(){
             atomOffset = jQuery(this).offset();
 
-            //Vekor ermitteln
+            // calculate vector
             VecX = wrapperWidth - atomOffset.left;
             VecY = wrapperHeight - atomOffset.top;
 
