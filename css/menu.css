@@ -2,16 +2,14 @@
 div.menu{
     position:relative;
     height:100%;
-    /* background: url(../resources/img/menu_bg.jpg) no*/
-    /* background:url(../resources/img/menu_bg.jpg) no-repeat;
-    background-position:top 250px center;
-    :*/;
 }
 img.logo{
+    top: -300px;
     position:relative;
     z-index:1;
 }
 /* main menu */
+nav, footer { opacity: 0 }
 nav#level{
     position:relative;
     top:50px;

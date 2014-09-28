@@ -20,6 +20,32 @@ var $atom;
 //    {"stage21":"done", "stage22":"", "stage23":""}
 //];
 
+
+/**
+ *   fadeIn
+ *   loading animations
+ *   atom flyIn, display menus, logo slideDown
+ **/
+function fadeIn(){
+
+    $atom = jQuery('.atom');
+    $atom.delay(200).animate({
+        top :   0,
+        left :  0
+    }, 1000,function(){
+        jQuery('nav, footer').delay(200).animate({
+            opacity: 1
+        }, 500, function(){
+            jQuery('img.logo').delay(200).animate({
+                top: 0
+            }, 300);
+        });
+
+    });
+
+}
+
+
 /**
  *   initMenu
  *   fly in effects
@@ -66,15 +92,8 @@ function initPSE (){
 
     }
 
-    $atom = jQuery('.atom');
-    $atom.delay(200).animate({
-        top :   0,
-        left :  0
-    }, 1000);
-
-        // TODO
+    fadeIn();
 }
-
 
 /**
  *   slideMenu
