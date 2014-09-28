@@ -5,6 +5,7 @@
 var $submenu = jQuery('.submenu');
 var left;
 var $atom;
+var clickSound = new Audio('resources/sounds/click.mp3');
 
 //// getting all levels existing from backend ??"?"
 //var allLevel = [
@@ -27,21 +28,20 @@ var $atom;
  *   atom flyIn, display menus, logo slideDown
  **/
 function fadeIn(){
-
     $atom = jQuery('.atom');
     $atom.delay(200).animate({
         top :   0,
         left :  0
-    }, 1000,function(){
-        jQuery('nav, footer').delay(200).animate({
-            opacity: 1
-        }, 500, function(){
-            jQuery('img.logo').delay(200).animate({
-                top: 0
-            }, 300);
-        });
+    }, 1000);
 
+    jQuery('nav, footer').delay(1200).animate({
+        opacity: 1
+    }, 500, function(){
+        jQuery('img.logo').delay(200).animate({
+            top: 0
+        }, 300);
     });
+
 
 }
 
@@ -124,20 +124,14 @@ function appendArrows(){
 
 }
 
-/**
- *   setActive
- *   adds active class to sub-menu
- **/
-function setActive (el){
-    jQuery('nav#level li').removeClass('active');
-    el.parent().addClass('active');
-}
-
 /*---  function calls ---*/
 initPSE();
 jQuery('nav#level a[href="#"]').on('click', function(event){
     event.preventDefault();
-    setActive(jQuery(this));
+    clickSound.play();
+});
+jQuery('nav a').on('click', function(){
+    clickSound.play();
 });
 
 

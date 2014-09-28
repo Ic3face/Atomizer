@@ -8,8 +8,10 @@ img.logo{
     position:relative;
     z-index:1;
 }
-/* main menu */
-nav, footer { opacity: 0 }
+
+/* main menu
+TODO fix menu hover states
+*/
 nav#level{
     position:relative;
     top:50px;
@@ -72,13 +74,13 @@ nav#level ul li a:hover, nav#level ul li a.done{
     transition:color ease .3s;
     color:#fff;
 }
-nav ul li a.done > div, nav#level ul li a.done > div,  nav#level ul li a:hover > div, nav#level ul li.active > a > div{
+nav ul li a.done > div, nav#level ul li a.done > div,  nav#level ul li a:hover > div, nav#level ul li:hover > a > div{
     border-color:#fff;
 }
-nav ul li a:hover > div span, nav#level ul li.active > a > div > span{
+nav ul li a:hover > div span, nav#level ul li:hover > a > div > span{
     background-position:-31px 0;
 }
-nav ul li a.done > div span, nav#level ul li.active.done > a > div > span{
+nav ul li a.done > div span, nav#level ul li.done > a > div > span{
     background-position:-60px 0;
 }
 /* level sub menu */
@@ -118,13 +120,9 @@ nav ul li:hover > ul li:nth-child(3){
     -o-transition:opacity .5s ease-out 0.2s;
     transition:opacity .5s ease-out 0.2s;
 }
-nav ul li.active > ul li{
-    opacity:1;
-}
-nav ul li.active > a > div{
+
+nav ul li:hover > a > div{
     color:#3e3e3e;
-}
-nav ul li.active > a > div{
     background:#fff;
 }
 /* top-menu */
@@ -140,7 +138,7 @@ nav#top-menu ul li a > div{
     background:#ffffff;
 }
 nav#top-menu ul li a:hover{
-    color:#ffffff;
+    color: #ffffff !important;
 }
 nav#top-menu ul li a:hover > div{
     -webkit-transition:all ease .4s;
@@ -148,6 +146,7 @@ nav#top-menu ul li a:hover > div{
     -o-transition:all ease .4s;
     background:#3e3e3e;
 }
+
 /* periodic system of elements */
 #pse{
     position:absolute;
@@ -195,3 +194,6 @@ footer a{
 footer a:hover{
     color:#ffffff;
 }
+
+/* hide elements on load */
+nav, footer { opacity: 0 }

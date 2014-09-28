@@ -5,14 +5,7 @@
 // set global elements
 var $atom, $overlay = jQuery('div.overlay');
 var VecX,VecY;
-
-/**
- *   shuffles Array
- **/
-function shuffle(o){ //v1.0
-    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-    return o;
-}
+var clickSound = new Audio('resources/sounds/click.mp3');
 
 /**
  *   normalizeVector
@@ -22,6 +15,14 @@ function normalizeVector (){
     var lengthVec = Math.sqrt((VecX*VecX+VecY*VecY));
     VecX = VecX/lengthVec;
     VecY = VecY/lengthVec;
+}
+
+/**
+ *   shuffles Array
+ **/
+function shuffle(o){ //v1.0
+    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
 }
 
 /**
@@ -116,7 +117,6 @@ function pageTransition(){
                 position: "relative",
                 top:   1000*-VecY,
                 left:  1000*-VecX
-
                 }, 1000, function(){
                 window.location = '#/menu';
             });
@@ -131,5 +131,6 @@ initStart();
 
 jQuery('a').on("click", function( event ) {
     event.preventDefault();
+    clickSound.play();
     pageTransition();
 });
