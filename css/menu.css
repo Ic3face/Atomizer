@@ -1,194 +1,199 @@
 /* Menu CSS */
-div.menu {
-    position: relative;
-    height: 100%;
-    /* background: url(../resources/img/menu_bg.jpg) no-repeat;
-    background-position: top 250px center;  */
+div.menu{
+    position:relative;
+    height:100%;
+    /* background: url(../resources/img/menu_bg.jpg) no*/
+    /* background:url(../resources/img/menu_bg.jpg) no-repeat;
+    background-position:top 250px center;
+    :*/;
 }
-
-img.logo {
-    position: relative;
-    z-index: 1;
+img.logo{
+    position:relative;
+    z-index:1;
 }
-
 /* main menu */
-nav#level {
-    position: relative;
-    top: 50px;
-    z-index: 1;
+nav#level{
+    position:relative;
+    top:50px;
+    z-index:1;
 }
-
-nav#level > ul > li > a {
-    font-weight: bold
+nav#level > ul > li > a{
+    font-weight:bold;
 }
-
-nav ul li {
-    float: left;
-    margin-bottom: 20px;
-    margin-left: 13px;
+nav ul li{
+    float:left;
+    margin-bottom:20px;
+    margin-left:13px;
 }
-
-nav ul li:first-child {
-    margin-left: 0;
+nav ul li:first-child{
+    margin-left:0;
 }
-
-nav ul li a {
-    color: #b3b3b3;
-    text-decoration: none;
-    font-size: 17px;
-    line-height: 30px;
+nav ul li a{
+    color:#b3b3b3;
+    text-decoration:none;
+    font-size:17px;
+    line-height:30px;
 }
-
-nav ul li a > div {
-    width: 110px;
-    height: 30px;
-    border: 1px solid #fff;
-    border-right-width: 2px;
-    border-left-width: 2px;
-    border-radius: 3px;
-    background: #3e3e3e;
-    text-align: center;
+nav ul li a > div{
+    width:110px;
+    height:30px;
+    border:1px solid #fff;
+    border-right-width:2px;
+    border-left-width:2px;
+    /*border-radius*/
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+    background:#3e3e3e;
+    text-align:center;
 }
-nav#level ul li a > div {
-    border-color: #b3b3b3;
+nav#level ul li a > div{
+    border-color:#b3b3b3;
 }
-
-    nav ul li a > div span {
-    display: inline-block;
-    float: right;
-    width: 30px;
-    height: 30px;
-    background: url(../resources/img/checkmarks.png);
-    background-position: 0 0;
+nav ul li a > div span{
+    display:inline-block;
+    float:right;
+    width:30px;
+    height:30px;
+    background:url(../resources/img/checkmarks.png);
+    background-position:0 0;
 }
-
-nav ul li a:hover {
-    transition: color ease .3s;
-    color: #3e3e3e
+nav ul li a:hover{
+    /*transition*/
+    -webkit-transition:color ease .3s;
+    -moz-transition:color ease .3s;
+    -o-transition:color ease .3s;
+    transition:color ease .3s;
+    color:#3e3e3e;
 }
-nav#level ul li a:hover, nav#level ul li a.done {
-    transition: color ease .3s;
-    color: #fff
+nav#level ul li a:hover, nav#level ul li a.done{
+    /*transition*/
+    -webkit-transition:color ease .3s;
+    -moz-transition:color ease .3s;
+    -o-transition:color ease .3s;
+    transition:color ease .3s;
+    color:#fff;
 }
-nav ul li a.done > div, nav#level ul li a.done > div,  nav#level ul li a:hover > div, nav#level ul li.active > a > div {
-    border-color: #fff;
+nav ul li a.done > div, nav#level ul li a.done > div,  nav#level ul li a:hover > div, nav#level ul li.active > a > div{
+    border-color:#fff;
 }
-
-nav ul li a:hover > div span, nav#level ul li.active > a > div > span {
-    background-position: -31px 0;
+nav ul li a:hover > div span, nav#level ul li.active > a > div > span{
+    background-position:-31px 0;
 }
-nav ul li a.done > div span, nav#level ul li.active.done > a > div > span {
-    background-position: -60px 0;
+nav ul li a.done > div span, nav#level ul li.active.done > a > div > span{
+    background-position:-60px 0;
 }
-
-
 /* level sub menu */
-nav ul ul li {
-    float: none;
-    margin: 5px 0;
+nav ul ul li{
+    float:none;
+    margin:5px 0;
 }
-
-nav ul li > ul li {
-    opacity: 0;
-    transition: opacity ease .2s;
+nav ul li > ul li{
+    opacity:0;
+    /*transition*/
+    -webkit-transition:opacity ease .2s;
+    -moz-transition:opacity ease .2s;
+    -o-transition:opacity ease .2s;
+    transition:opacity ease .2s;
 }
-
-nav ul li:hover > ul li:first-child {
-    opacity: 1;
-    transition: opacity .3s ease-out;
+nav ul li:hover > ul li:first-child{
+    opacity:1;
+    /*transition*/
+    -webkit-transition:opacity .3s ease-out;
+    -moz-transition:opacity .3s ease-out;
+    -o-transition:opacity .3s ease-out;
+    transition:opacity .3s ease-out;
 }
-
-nav ul li:hover > ul li:nth-child(2) {
-    opacity: 1;
-    transition: opacity .4s ease-out .1s;
+nav ul li:hover > ul li:nth-child(2){
+    opacity:1;
+    /*transition*/
+    -webkit-transition:opacity .4s ease-out .1s;
+    -moz-transition:opacity .4s ease-out .1s;
+    -o-transition:opacity .4s ease-out .1s;
+    transition:opacity .4s ease-out .1s;
 }
-
-nav ul li:hover > ul li:nth-child(3) {
-    opacity: 1;
-    transition: opacity .5s ease-out 0.2s;
+nav ul li:hover > ul li:nth-child(3){
+    opacity:1;
+    /*transition*/
+    -webkit-transition:opacity .5s ease-out 0.2s;
+    -moz-transition:opacity .5s ease-out 0.2s;
+    -o-transition:opacity .5s ease-out 0.2s;
+    transition:opacity .5s ease-out 0.2s;
 }
-
-nav ul li.active > ul li {
-    opacity: 1;
+nav ul li.active > ul li{
+    opacity:1;
 }
-
-nav ul li.active > a > div {
-    color: #3e3e3e
+nav ul li.active > a > div{
+    color:#3e3e3e;
 }
-
-nav ul li.active > a > div {
-    background: #fff;
+nav ul li.active > a > div{
+    background:#fff;
 }
-
 /* top-menu */
-nav#top-menu {
-    position: absolute;
-    top: 0;
-    right: 0;
+nav#top-menu{
+    position:absolute;
+    top:0;
+    right:0;
 }
-
-nav#top-menu ul li a {
-    color: #3e3e3e;
+nav#top-menu ul li a{
+    color:#3e3e3e;
 }
-
-nav#top-menu ul li a > div {
-    background: #ffffff;
+nav#top-menu ul li a > div{
+    background:#ffffff;
 }
-
-nav#top-menu ul li a:hover {
-    color: #ffffff;
+nav#top-menu ul li a:hover{
+    color:#ffffff;
 }
-
-nav#top-menu ul li a:hover > div {
-    background: #3e3e3e;
+nav#top-menu ul li a:hover > div{
+    -webkit-transition:all ease .4s;
+    -moz-transition:all ease .4s;
+    -o-transition:all ease .4s;
+    background:#3e3e3e;
 }
-
 /* periodic system of elements */
 #pse{
-    position: absolute;
-    width: 990px;
-    top: 250px;
-    left: 50%;
-    transform: translate(-50%);
+    position:absolute;
+    width:1210px;
+    top:280px;
+    left:50%;
+    /*transform*/
+    -webkit-transform:translate(-50%);
+    -moz-transform:translate(-50%);
+    -ms-transform:translate(-50%);
+    -o-transform:translate(-50%);
+    transform:translate(-50%);
 }
-
-#pse .atom {
-    position: relative;
-    display: inline-block;
-    margin: 5px;
-
-    width: 45px;
-    height: 45px;
-    background: url(../resources/img/atom-sprite.jpg);
-    vertical-align: top;
-    zoom: 1;
+#pse .atom{
+    position:relative;
+    display:inline-block;
+    margin: 3px;
+    width:61px; /* 1210/18= 67,2 --> -2*3margin = 61 */
+    height:61px;
+    background:url(../resources/img/atom-sprite.jpg);
+    background-size: 8300%; /* scalable icons https://coderwall.com/p/frib5a */
+    vertical-align:top;
 }
-
 
 /* footer menu */
-footer {
-    position: absolute;
-    bottom: 0;
-    padding: 20px 0;
-    width: 100%;
-    border-top: 1px solid #b2b2b2;
-    background: #3e3e3e;
+footer{
+    position:absolute;
+    bottom:0;
+    padding:20px 0;
+    width:100%;
+    border-top:1px solid #b2b2b2;
+    background:#3e3e3e;
 }
-
-footer ul {
-    float: right;
-    color: #b2b2b2;
+footer ul{
+    float:right;
+    color:#b2b2b2;
 }
-
-footer ul li {
-    display: inline-block;
+footer ul li{
+    display:inline-block;
 }
-
-footer a {
-    color: #b2b2b2;
-    text-decoration: none;
+footer a{
+    color:#b2b2b2;
+    text-decoration:none;
 }
-
-footer a:hover {
-    color: #ffffff;
+footer a:hover{
+    color:#ffffff;
 }

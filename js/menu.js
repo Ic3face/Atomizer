@@ -4,6 +4,7 @@
 
 var $submenu = jQuery('.submenu');
 var left;
+var $atom;
 
 //// getting all levels existing from backend ??"?"
 //var allLevel = [
@@ -24,13 +25,15 @@ var left;
  *   fly in effects
  *   append level menu to html
  **/
-function initMenu (){
+function initPSE (){
     var $pseWrapper = jQuery('#pse');
     var atomArray = [];
+
     // create atoms and fill atomArray
     for(var i = 0; i < 83; i++) {
+
         var atom = document.createElement("div");
-        var atomStyle = 'background-position: ' + i*-45 + 'px 0;';// opacity: 0';
+        var atomStyle = 'background-position: ' + i*(100/82) + '% 0;';
         atom.setAttribute('style', atomStyle);
         atom.setAttribute('class', 'atom');
         atom.setAttribute('title', "PSE Nr: "+(i+1));
@@ -39,19 +42,35 @@ function initMenu (){
     }
 
     // add atoms
-    // table width = 1200px, margin = 5px, max 18 atoms per row
-    var atomWidth = 45;//px
+    // table width = 1210px, margin = 3px, max 18 atoms per row
+    var atomWidth = 61;//px
     var spacer;
+    var posTop, posLeft;
     for(var i = 0; i < atomArray.length; i++) {
-        spacer = 5;
+        spacer = 3;
         if (i === 1){ // atom n-1
-            spacer = ((atomWidth+10)*16)+5; // (atomWidth + 2*margin)*spaces + margin-left
+            spacer = ((atomWidth+6)*16)+3; // (atomWidth + 2*margin)*spaces + margin-left
         }else if(i === 4 || i === 12){
-            spacer = ((atomWidth+10)*10)+5;
+            spacer = ((atomWidth+6)*10)+3;
         }
-        jQuery(atomArray[i]).css({"margin-left": spacer + "px"}).appendTo($pseWrapper);
+
+        // spread out atoms random outside of view
+        do {
+            posTop = ((Math.random() * 2) -1)*1000; //random between -1 to 1
+        }while( posTop < 500 && posTop > -500);
+        do {
+            posLeft = ((Math.random() * 2) -1)*1000; //random between -1 to 1
+        }while( posLeft < 500 && posLeft > -500);
+
+        jQuery(atomArray[i]).css({"margin-left": spacer + "px", top: posTop, left:posLeft}).appendTo($pseWrapper);
+
     }
 
+    $atom = jQuery('.atom');
+    $atom.delay(200).animate({
+        top :   0,
+        left :  0
+    }, 1000);
 
         // TODO
 }
@@ -96,7 +115,7 @@ function setActive (el){
 }
 
 /*---  function calls ---*/
-initMenu();
+initPSE();
 jQuery('nav#level a[href="#"]').on('click', function(event){
     event.preventDefault();
     setActive(jQuery(this));
