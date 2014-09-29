@@ -1,0 +1,64 @@
+/* Win CSS */
+a[href ^="#"] {
+    text-decoration: none;
+}
+.win .left-col{
+    float:left;
+    height:700px;
+    width:150px;
+    margin-right:20px;
+    position:relative;
+}
+.win .main-col{
+    float:left;
+    height:700px;
+    width:826px;
+}
+.win .right-col{
+    float:left;
+    width:178px;
+    margin-left:20px;
+    color:#fff;
+}
+.level-info {
+    border: 1px solid #fff;
+    margin-bottom: 20px;
+    height: 650px;
+}
+.win .right-col ul li{
+    margin:10px;
+}
+.win .right-col .name{
+    font-size:30px;
+    text-align:center;
+}
+.left-col .actions{
+    margin-bottom: 10px;
+}
+.left-col .actions span, .hint, .back, .popup .button span{
+    font-family: kirsten;
+    background:#df7d1b;
+    display:block;
+    height:30px;
+    line-height:30px;
+    text-align:center;
+    cursor:pointer;
+    margin-bottom:10px;
+    color:#fff;
+    text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.6);
+}
+.level-menu{
+    border:1px solid #fff;
+    height: 619px;
+    overflow: auto;
+}
+.level-menu li{
+    width:100%;
+    text-align:center;
+    margin:9px 0;
+    cursor:pointer;
+}
+#playground{
+    position:relative;
+}
+
