@@ -2,7 +2,12 @@
  * 
  * MoleView.js 
  */
-
+function initThreeJs(task, atoms) {
+    console.log(task.name);
+    for(var i = 0; i < atoms.length; i++) {
+        console.log(atoms[i].name);
+    }
+}
 
 /**
  * Deklarieren von Globalenvariablen

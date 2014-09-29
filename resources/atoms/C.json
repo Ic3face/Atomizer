@@ -1,7 +1,7 @@
 {
-    "name": "ohlenstoff",
+    "name": "Kohlenstoff",
     "sign": "C",
-    "desc": "Beschreibung Kohlenstof",
+    "desc": "Beschreibung Kohlenstoff",
     "free": 4,
     "color": "ffc700"
 }

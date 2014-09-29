@@ -82,19 +82,20 @@ atomizerApp.controller('WinCtrl', ['$scope', '$routeParams', '$http', function(s
     }).success(function(data){
         scope.task = data;
         scope.tempAtoms = scope.task.atoms;
-
+        var j = 0;
         for(var i=0; i < scope.tempAtoms.length; i++){
             http({
                 url: 'resources/atoms/'+scope.tempAtoms[i]+'.json',
                 method: 'GET'
             }).success(function(data) {
                 scope.atoms.push(data);
+                j++;
+                if(i == j) {
+                    initThreeJs(scope.task,scope.atoms);
+                }
             });
         }
-    });
 
-    scope.getElement = function(sign,free,color) {
-        getElement(sign,free,color);
-    }
+    });
 
 }]);
