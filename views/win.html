@@ -1,1 +1,25 @@
-<h1>DU HAST GEWONNEN!!!</h1>
+<div class="win">
+    <div class="left-col">
+        <div class="actions">
+            <span class="toggleLinkMode" onclick="toggleLinkMode();">Link Atoms</span>
+            <span class="toggleDeleteMode" onclick="toggleDeleteMode();">Delete Atoms</span>
+        </div>
+        <ul class="level-menu">
+            <li ng-repeat="atom in atoms" >
+                <img ng-src="resources/img/menu-elements/{{atom.sign}}.jpg" title="{{atom.name}}" >
+            </li>
+        </ul>
+    </div>
+    <div class="main-col" id="playground">
+
+    </div>
+    <div class="right-col">
+        <ul class="level-info">
+            <li class="name">{{task.name}}</li>
+            <li class="hint"><span class="hint" hint="{{task.hint}}">Hint</span></li>
+            <li class="desc">{{task.desc}}</li>
+        </ul>
+        <a href="#/menu"><span class="back">Back to Menu</span></a>
+    </div>
+</div>
+

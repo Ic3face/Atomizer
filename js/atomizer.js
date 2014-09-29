@@ -23,7 +23,7 @@ atomizerApp.config(['$routeProvider', function(routeProvider) {
         controller: 'WinCtrl'
     }).
     otherwise({
-        redirectTo: '/'
+        redirectTo: '/menu'
     });
 }]);
 
@@ -39,10 +39,12 @@ atomizerApp.controller('MenuCtrl', ['$scope', function(scope) {
 
 atomizerApp.controller('LevelCtrl', ['$scope', '$routeParams', '$http', function(scope, routeParams, http) {
     scope.atoms = new Array();
+    scope.levelnr = routeParams.level;
+    scope.tasknr = routeParams.task;
     jQuery('.level').append('<link rel="stylesheet" href="css/level.css" />');
     jQuery('.level').append('<script src="js/level.js"></script>');
     http({
-        url: 'resources/level/'+routeParams.level+'/task'+routeParams.task+'.json',
+        url: 'resources/level/'+scope.levelnr+'/task'+scope.tasknr+'.json',
         method: 'GET'
     }).success(function(data){
         scope.task = data;
@@ -62,8 +64,37 @@ atomizerApp.controller('LevelCtrl', ['$scope', '$routeParams', '$http', function
         getElement(sign,free,color);
     }
 
+    scope.win = function () {
+        console.log("test");
+    }
+
 }]);
 
-atomizerApp.controller('WinCtrl', ['$scope', function(scope) {
+atomizerApp.controller('WinCtrl', ['$scope', '$routeParams', '$http', function(scope, routeParams, http) {
+    scope.atoms = new Array();
+    scope.levelnr = routeParams.level;
+    scope.tasknr = routeParams.task;
+    jQuery('.win').append('<link rel="stylesheet" href="css/win.css" />');
+    jQuery('.win').append('<script src="js/win.js"></script>');
+    http({
+        url: 'resources/level/'+scope.levelnr+'/task'+scope.tasknr+'.json',
+        method: 'GET'
+    }).success(function(data){
+        scope.task = data;
+        scope.tempAtoms = scope.task.atoms;
+
+        for(var i=0; i < scope.tempAtoms.length; i++){
+            http({
+                url: 'resources/atoms/'+scope.tempAtoms[i]+'.json',
+                method: 'GET'
+            }).success(function(data) {
+                scope.atoms.push(data);
+            });
+        }
+    });
+
+    scope.getElement = function(sign,free,color) {
+        getElement(sign,free,color);
+    }
 
 }]);

@@ -550,7 +550,7 @@ function checkWin() {
             }
             if(currentLinks.toString() == winLinks.toString()) {
                 setTimeout(function() {
-                    window.location = 'http://atomizer.reiche-online.com/#/win';
+                    window.location = '#/win?level='+jQuery('.level').attr("level")+'&task='+jQuery('.level').attr("task");
                 },800);
 
             }
@@ -558,5 +558,4 @@ function checkWin() {
 
     }
 }
-
 initPlayground();
