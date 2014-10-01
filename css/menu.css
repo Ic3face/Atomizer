@@ -151,7 +151,8 @@ nav#top-menu ul li a:hover > div{
 #pse{
     position:absolute;
     width:1210px;
-    top:280px;
+    /*top:280px; */
+    top: 20%;
     left:50%;
     /*transform*/
     -webkit-transform:translate(-50%);
@@ -175,7 +176,9 @@ nav#top-menu ul li a:hover > div{
 footer{
     position:absolute;
     bottom:0;
+    left: -5px;
     padding:20px 0;
+    padding-right: 5px;
     width:100%;
     border-top:1px solid #b2b2b2;
     background:#3e3e3e;

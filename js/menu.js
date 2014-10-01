@@ -29,12 +29,12 @@ var clickSound = new Audio('resources/sounds/click.mp3');
  **/
 function fadeIn(){
     $atom = jQuery('.atom');
-    $atom.delay(200).animate({
-        top :   0,
-        left :  0
+    $atom.delay(500).animate({
+       top :   0,
+       left :  0
     }, 1000);
 
-    jQuery('nav, footer').delay(1200).animate({
+    jQuery('nav, footer').delay(2000).animate({
         opacity: 1
     }, 500, function(){
         jQuery('img.logo').delay(200).animate({
@@ -83,10 +83,10 @@ function initPSE (){
         // spread out atoms random outside of view
         do {
             posTop = ((Math.random() * 2) -1)*1000; //random between -1 to 1
-        }while( posTop < 500 && posTop > -500);
+        }while( posTop < 700 && posTop > -700);
         do {
             posLeft = ((Math.random() * 2) -1)*1000; //random between -1 to 1
-        }while( posLeft < 500 && posLeft > -500);
+        }while( posLeft < 700 && posLeft > -700);
 
         jQuery(atomArray[i]).css({"margin-left": spacer + "px", top: posTop, left:posLeft}).appendTo($pseWrapper);
 
