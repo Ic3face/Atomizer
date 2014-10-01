@@ -3,5 +3,7 @@
     "sign": "C",
     "desc": "Beschreibung Kohlenstoff",
     "free": 4,
+    "mass": 12,
+    "radius": 70,
     "color": "ffc700"
 }

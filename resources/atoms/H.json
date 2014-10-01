@@ -3,5 +3,7 @@
     "sign": "H",
     "desc": "Beschreibung Wasserstoff",
     "free": 1,
+    "mass": 1,
+    "radius": 25,
     "color": "00CACE"
 }

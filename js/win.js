@@ -7,14 +7,37 @@ function initThreeJs(task, atoms) {
     for(var i = 0; i < atoms.length; i++) {
         console.log(atoms[i].name);
     }
+    buildmole(task, atoms);
 }
+/**
+ * TEST
+ * START
+ */
+//geoverbindung.parameters.height = ( new THREE.Vector3((kugel2.position.x - cube.position.x), (kugel2.position.y - cube.position.y), (kugel2.position.z - cube.position.z)).length());
+//console.log(geoverbindung.parameters.height);
+
+function buildmole (task, atoms) {
+	
+	var geometry = [];
+	
+	
+	var arry = task.atoms.length;
+	
+}
+
+
+/**
+ * Test
+ * ENDE
+ */
+
 
 /**
  * Deklarieren von Globalenvariablen
  */
 var scene, camera, renderer, uhr, stats, projector;
 
-var windiv, container, context1, texture1, sprite1;
+var container, controls;
 
 var objects = [];
 
@@ -23,6 +46,10 @@ camera = new THREE.PerspectiveCamera(75, 826/700, 0.1, 1000);
 renderer = new THREE.WebGLRenderer({antialias: true});
 uhr = new THREE.Clock();
 stats = new Stats();
+controls = new THREE.OrbitControls( camera, renderer.domElement );
+controls.noKeys = true;
+controls.maxDistance = 80;
+controls.minDistance = 20;
 projector = new THREE.Projector();
 stats.domElement.style.position = 'absolute';
 stats.domElement.style.bottom = '10px';
@@ -65,7 +92,8 @@ var lichtspiel = new THREE.Object3D();
 var verbindung1 = new THREE.Mesh(geoverbindung, mat3);
 var verbindung2 = new THREE.Mesh(geoverbindung, mat3);
 var ambientlight = new THREE.AmbientLight(0x555555);
-var directionalLight = new THREE.DirectionalLight(0xffffff);
+var globalLight = new THREE.HemisphereLight(0xffffff, 0x333333, 1);
+var directionalLight = new THREE.DirectionalLight(0x555555);
 cube.name = "Sauerstoff";
 kugel2.name = "Wasserstoff";
 objects.push(cube);
@@ -77,7 +105,7 @@ objects.push(verbindung2);
 /**
  * Positionieren von Objekten
  */
-directionalLight.position.set(5, 5, 5);
+directionalLight.position.set(0, -10, 0);
 directionalLight.target.add(cube);
 camera.position.z = 25;
 kugel2.position.set( -10, -4, 0);
@@ -90,22 +118,6 @@ rotbindung (cube, verbindung1);
 rotbindung (cube, verbindung2);
 
 /**
- * TEST
- * START
- */
-geoverbindung.parameters.height = ( new THREE.Vector3((kugel2.position.x - cube.position.x), (kugel2.position.y - cube.position.y), (kugel2.position.z - cube.position.z)).length());
-console.log(geoverbindung.parameters.height);
-
-
-
-
-/**
- * Test
- * ENDE
- */
-
-
-/**
  * Hinzufügen von Objekten zu der Szene
  */
 cube.add(kugel2);
@@ -115,6 +127,7 @@ cube.add(verbindung2);
 scene.add(ambientlight);
 scene.add(cube);
 lichtspiel.add(directionalLight);
+lichtspiel.add(globalLight);
 scene.add(lichtspiel); 
 
 
@@ -190,7 +203,7 @@ function klicksteuerung( event ) {
 
 	if ( intersects.length > 0 ) {
 
-		intersects[ 0 ].object.material.color.setHex( Math.random() * 0xffffff );
+		//do anything
 
 	}
 

@@ -3,5 +3,7 @@
     "sign": "O",
     "desc": "Beschreibung Wasserstoff",
     "free": 2,
+    "mass": 16,
+    "radius": 60,
     "color": "ff7f02"
 }
