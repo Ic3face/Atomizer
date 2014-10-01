@@ -3,26 +3,53 @@
  * MoleView.js 
  */
 function initThreeJs(task, atoms) {
-    console.log(task.name);
-    for(var i = 0; i < atoms.length; i++) {
-        console.log(atoms[i].name);
-    }
+    
     buildmole(task, atoms);
 }
 /**
  * TEST
  * START
  */
-//geoverbindung.parameters.height = ( new THREE.Vector3((kugel2.position.x - cube.position.x), (kugel2.position.y - cube.position.y), (kugel2.position.z - cube.position.z)).length());
-//console.log(geoverbindung.parameters.height);
-
+var atomarray;
 function buildmole (task, atoms) {
 	
-	var geometry = [];
-	
-	
-	var arry = task.atoms.length;
-	
+	atomarray = [];
+	for (i = 0; i < task.winstate.atoms.length; i++){
+		for(j = 0; j < atoms.length; j++){
+			if(task.winstate.atoms[i] == atoms[j].sign){
+				
+				var geokugel = new THREE.SphereGeometry(atoms[j].radius, 20, 20);
+				var matkugel = new THREE.MeshPhongMaterial({color: (parseInt(atoms[j].color, 16)), emissive: 0x101010, shininess: 30, specular: 0x242424, wireframe: false});
+				
+				var atom = new THREE.Mesh(geokugel, matkugel);
+				
+				atom.free = [[false, new THREE.Vector3(-10, -10, 0)],
+				             [false, new THREE.Vector3(10, -10, 0)],
+				             [false, new THREE.Vector3(0, 10, 10)],
+				             [false, new THREE.Vector3(0, 10, -10)],
+				             [false, new THREE.Vector3(0, -10, 10)],
+				             [false, new THREE.Vector3(0, -10, -10)],
+				             [false, new THREE.Vector3( 10, 10, 0)],
+				             [false, new THREE.Vector3(-10, 10, 0)]
+				];
+				
+				for(k = 0; k < atoms[j].free; k++ ){
+					atom.free[k][0] = true;
+				}
+				
+				atom.name = atoms[j].name;
+				atom.desc = atoms[j].desc;
+				atom.sign = atoms[j].sign;
+				
+				objects.push(atom);
+				atomarray.push(atom);
+			}
+		}
+	}
+
+	for(i = 0; i < task.winstate.links.length; i++){
+		
+	}
 }
 
 
