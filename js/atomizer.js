@@ -32,9 +32,43 @@ atomizerApp.controller('StartCtrl', ['$scope', function(scope) {
     jQuery('.start').append('<script src="js/start.js"></script>');
 }]);
 
-atomizerApp.controller('MenuCtrl', ['$scope', function(scope) {
-    jQuery('.menu').append('<link rel="stylesheet" href="css/menu.css" />');
-    jQuery('.menu').append('<script src="js/menu.js"></script>');
+atomizerApp.controller('MenuCtrl', ['$scope','$http', function(scope, http) {
+    var $menu = jQuery('.menu');
+    $menu.append('<link rel="stylesheet" href="css/menu.css" />');
+
+    var levelCounter = 1;
+    scope.level = new Array();
+
+
+    ( function levelCall(){ // freakin' self executing function
+        http({
+            url: 'resources/level/level'+levelCounter+'.json',
+            method: 'GET'
+        }).success(function(data){
+            scope.level[levelCounter-1] = [];
+            scope.level[levelCounter-1].push(data.name); //array[0][0] = LevelName
+
+            taskCall(levelCounter, 1);
+
+            levelCounter++;
+            levelCall(); // freakin' rekursion 'cause while+ajax is a hell
+        });
+    })();
+
+    function taskCall(level, taskCounter){
+        http({
+            url: 'resources/level/'+level+'/task'+taskCounter+'.json',
+            method: 'GET'
+        }).success(function(data){
+            scope.level[level-1].push(data.name); //array[0][>0] = TaskName
+            console.log(scope.level[level-1]);
+
+            taskCounter++;
+            taskCall(level, taskCounter); // freakin' rekursion 'cause while+ajax is a hell
+        });
+    }
+
+    $menu.append('<script src="js/menu.js"></script>');
 }]);
 
 atomizerApp.controller('LevelCtrl', ['$scope', '$routeParams', '$http', function(scope, routeParams, http) {
