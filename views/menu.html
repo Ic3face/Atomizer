@@ -1,5 +1,4 @@
 <div class="menu">
-    <!--<img class="logo" src="resources/img/logo.png" title="Start">-->
     <img class="logo" src="resources/img/logo_alpha.png" title="Atomizer - the Game">
     <nav id="top-menu">
         <ul>
@@ -15,40 +14,25 @@
         </ul>
     </nav>
 
+   <!-- Expression: {{levels}} -->
+
     <nav id="level">
         <ul>
-            <li class="done">
+            <li class="{{level.done}} done" ng-repeat="(key,level) in levels">
                 <a href="#">
-                    <div>Level 1<span></span></div>
+                    <div title="{{level.name}}">Level {{key+1}}<span></span></div>
                 </a>
                 <ul>
-                    <li class="done"><a href="#/level?level=1&task=1">
-                        <div>Stufe 1<span></span></div>
-                    </a></li>
-                    <li><a href="#/level?level=1&task=2">
-                        <div>Stufe 2<span></span></div>
-                    </a></li>
-                    <li><a href="/level?level=1&task=3">
-                        <div>Stufe 3<span></span></div>
-                    </a></li>
+                    <li class="{{task.done}}" ng-repeat="(taskKey,task) in level.tasks">
+                        <a href="#/level?level={{key+1}}&task={{taskKey+1}}">
+                            <div title="{{task}}">Stufe {{taskKey+1}}<span></span></div>
+                        </a>
+                    </li>
                 </ul>
             </li>
-            <li><a href="#">
-                <div>Level 2<span></span></div>
-            </a></li>
-            <li>
-                <a href="#">
-                    <div>Level 3<span></span></div>
-                </a>
-            </li>
-            <li><a href="#">
-                <div>Level 4<span></span></div>
-            </a></li>
-            <li><a href="#">
-                <div>Level 5<span></span></div>
-            </a></li>
         </ul>
     </nav>
+
     <div id="pse"></div>
 </div>
 

@@ -33,11 +33,13 @@ atomizerApp.controller('StartCtrl', ['$scope', function(scope) {
 }]);
 
 atomizerApp.controller('MenuCtrl', ['$scope','$http', function(scope, http) {
+    // TODO level.done ermitteln!
     var $menu = jQuery('.menu');
     $menu.append('<link rel="stylesheet" href="css/menu.css" />');
+    $menu.append('<script src="js/menu.js"></script>');
 
     var levelCounter = 1;
-    scope.level = new Array();
+    scope.levels =[];
 
 
     ( function levelCall(){ // freakin' self executing function
@@ -45,9 +47,8 @@ atomizerApp.controller('MenuCtrl', ['$scope','$http', function(scope, http) {
             url: 'resources/level/level'+levelCounter+'.json',
             method: 'GET'
         }).success(function(data){
-            scope.level[levelCounter-1] = [];
-            scope.level[levelCounter-1].push(data.name); //array[0][0] = LevelName
-
+            scope.levels[levelCounter-1] ={name: data.name }; //array[0][0] = LevelName
+            console.log("level name: " + scope.levels[levelCounter-1].name);
             taskCall(levelCounter, 1);
 
             levelCounter++;
@@ -56,19 +57,24 @@ atomizerApp.controller('MenuCtrl', ['$scope','$http', function(scope, http) {
     })();
 
     function taskCall(level, taskCounter){
+        if(scope.levels[level-1].tasks === undefined){
+            scope.levels[level-1].tasks = [];
+        }
         http({
             url: 'resources/level/'+level+'/task'+taskCounter+'.json',
             method: 'GET'
         }).success(function(data){
-            scope.level[level-1].push(data.name); //array[0][>0] = TaskName
-            console.log(scope.level[level-1]);
+            console.log("task name: " + data.name);
+
+            scope.levels[level-1].tasks.push(data.name); //array[0][>0] = TaskName
+               console.log("Levels: " +  scope.levels);
 
             taskCounter++;
             taskCall(level, taskCounter); // freakin' rekursion 'cause while+ajax is a hell
         });
     }
 
-    $menu.append('<script src="js/menu.js"></script>');
+
 }]);
 
 atomizerApp.controller('LevelCtrl', ['$scope', '$routeParams', '$http', function(scope, routeParams, http) {
