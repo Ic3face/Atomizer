@@ -2,17 +2,81 @@
  * 
  * MoleView.js 
  */
+
+
+var scene, camera, renderer, uhr, delta, stats, projector;
+
+var container, controls;
+
+var molekuel, namebox, descbox;
+
+var objects = [];
+
 function initThreeJs(task, atoms) {
-    
-    buildmole(task, atoms);
+	
+	scene = new THREE.Scene();
+	camera = new THREE.PerspectiveCamera(75, 826/700, 0.1, 1000); 
+	renderer = new THREE.WebGLRenderer({antialias: true});
+	uhr = new THREE.Clock();
+	stats = new Stats();
+	controls = new THREE.OrbitControls( camera, renderer.domElement );
+	controls.noKeys = true;
+	projector = new THREE.Projector();
+	stats.domElement.style.position = 'absolute';
+	stats.domElement.style.bottom = '10px';
+	container = document.getElementById('playground');
+	delta = uhr.getDelta();
+	
+	molekuel = buildmole(task, atoms);
+	molekuel.name = "Molekül";
+	
+	/**
+	 * Zusammensuchen der HTML-Elemente
+	 */
+	namebox = jQuery("#atomname");
+	descbox = jQuery("#atomdesc");
+	
+	var lichtspiel = new THREE.Object3D();
+	var ambientlight = new THREE.AmbientLight(0x555555);
+	var globalLight = new THREE.HemisphereLight(0xffffff, 0x333333, 1);
+	var directionalLight = new THREE.DirectionalLight(0x555555);
+	
+	directionalLight.position.set(0, -10, 0);
+	directionalLight.target.add(molekuel);
+	
+	/**
+	 * Hinzufügen von Objekten zu der Szene
+	 */
+	scene.add(ambientlight);
+	lichtspiel.add(directionalLight);
+	lichtspiel.add(globalLight);
+	scene.add(lichtspiel);
+	scene.add(molekuel);
+
+
+	/**
+	 * Rendergröße festlegen und einfügen des Renderers in die DOM
+	 */
+	renderer.setSize(826, 700);
+	renderer.setClearColor(0x3e3e3e);
+	renderer.domElement.id = "cview";
+	container.appendChild(renderer.domElement);
+	container.appendChild( stats.domElement );
+
+	document.addEventListener( 'mousedown', klicksteuerung, false );
+	document.addEventListener( 'mousemove', hoversteuerung, false );
+
+	render();
+	
 }
-/**
- * TEST
- * START
- */
+
+
 var atomarray;
+
+
 function buildmole (task, atoms) {
 	
+	var obj3d = new THREE.Object3D();
 	atomarray = [];
 	for (i = 0; i < task.winstate.atoms.length; i++){
 		for(j = 0; j < atoms.length; j++){
@@ -23,155 +87,58 @@ function buildmole (task, atoms) {
 				
 				var atom = new THREE.Mesh(geokugel, matkugel);
 				
-				atom.free = [[false, new THREE.Vector3(-10, -10, 0)],
-				             [false, new THREE.Vector3(10, -10, 0)],
-				             [false, new THREE.Vector3(0, 10, 10)],
-				             [false, new THREE.Vector3(0, 10, -10)],
-				             [false, new THREE.Vector3(0, -10, 10)],
-				             [false, new THREE.Vector3(0, -10, -10)],
-				             [false, new THREE.Vector3( 10, 10, 0)],
-				             [false, new THREE.Vector3(-10, 10, 0)]
-				];
-				
-				for(k = 0; k < atoms[j].free; k++ ){
-					atom.free[k][0] = true;
-				}
-				
 				atom.name = atoms[j].name;
 				atom.desc = atoms[j].desc;
 				atom.sign = atoms[j].sign;
 				
 				objects.push(atom);
 				atomarray.push(atom);
+				obj3d.add(atom);
 			}
 		}
 	}
-
-	for(i = 0; i < task.winstate.links.length; i++){
+	
+	var verbindmat = new THREE.MeshPhongMaterial({color: 0xcccccc, emissive: 0x101010, shininess: 40, specular: 0xaaaaaa, wireframe: false});
+	
+	switch(task.hint){
+	
+	case "H2O":
+		
+		atomarray[0].position.set(-120,-60,0);
+		atomarray[1].position.set(120,-60,0);
+		atomarray[2].position.set(0,0,0);
+			
+		var vec1 = new THREE.Vector3((atomarray[0].position.x-atomarray[2].position.x),(atomarray[0].position.y-atomarray[2].position.y),(atomarray[0].position.z-atomarray[2].position.z));
+		var vec2 = new THREE.Vector3((atomarray[1].position.x-atomarray[2].position.x),(atomarray[1].position.y-atomarray[2].position.y),(atomarray[1].position.z-atomarray[2].position.z));
+		
+		var geoverbindung = new THREE.CylinderGeometry(8, 8, vec1.length(), 16);
+		
+		var verbind = new THREE.Mesh(geoverbindung, verbindmat);
+		var verbind2 = new THREE.Mesh(geoverbindung, verbindmat);
+		
+		verbind.position.set((vec1.x/2), (vec1.y/2), (vec1.z/2));
+		verbind2.position.set((vec2.x/2), (vec2.y/2), (vec1.z/2));
+		
+		rotbindung (atomarray[2], atomarray[0],verbind);
+		rotbindung (atomarray[2], atomarray[1],verbind2);
+		
+		obj3d.add(verbind);
+		obj3d.add(verbind2);
+		
+		camera.position.z = 280;
+		controls.maxDistance = 500;
+		controls.minDistance = 220;
+		
+		break;
+		
+	case "CO2":
 		
 	}
+	
+	
+	return obj3d;
+	
 }
-
-
-/**
- * Test
- * ENDE
- */
-
-
-/**
- * Deklarieren von Globalenvariablen
- */
-var scene, camera, renderer, uhr, stats, projector;
-
-var container, controls;
-
-var objects = [];
-
-scene = new THREE.Scene();
-camera = new THREE.PerspectiveCamera(75, 826/700, 0.1, 1000); 
-renderer = new THREE.WebGLRenderer({antialias: true});
-uhr = new THREE.Clock();
-stats = new Stats();
-controls = new THREE.OrbitControls( camera, renderer.domElement );
-controls.noKeys = true;
-controls.maxDistance = 80;
-controls.minDistance = 20;
-projector = new THREE.Projector();
-stats.domElement.style.position = 'absolute';
-stats.domElement.style.bottom = '10px';
-container = document.getElementById('playground');
-
-
-/**
- * Zusammensuchen der HTML-Elemente
- */
-var namebox = jQuery("#atomname");
-var descbox = jQuery("#atomdesc");
-
-
-/**
- * Hilfsvariable für die Zeit zwischen jedem Frame
- */
-var delta = uhr.getDelta();
-
-/**
- * Erstellen der Geometrie von Körpern
- */ 
-var geometry = new THREE.SphereGeometry(5, 20, 20); 
-var geokugel2 = new THREE.SphereGeometry(2, 20, 20);
-var geoverbindung = new THREE.CylinderGeometry(0.5, 0.5, 8);
-
-/**
- * Erstellen der Oberflächenbeschaffenheit und -verhalten auf Licht
- */
-var material = new THREE.MeshPhongMaterial({color: 0x00aa00, wireframe: false});
-var mat2 = new THREE.MeshPhongMaterial({color: 0xaa0000, emissive: 0x101010, shininess: 30, specular: 0x242424, wireframe: false});
-var mat3 = new THREE.MeshPhongMaterial({color: 0xcccccc, emissive: 0x101010, shininess: 40, specular: 0xaaaaaa, wireframe: false});
-
-/**
- * Erstellen der Objekte mit einer Geometrie und OFB
- */
-var cube = new THREE.Mesh(geometry, material);
-var kugel2 = new THREE.Mesh(geokugel2, mat2);
-var kugel3 = new THREE.Mesh(geokugel2, mat2);
-var lichtspiel = new THREE.Object3D();
-var verbindung1 = new THREE.Mesh(geoverbindung, mat3);
-var verbindung2 = new THREE.Mesh(geoverbindung, mat3);
-var ambientlight = new THREE.AmbientLight(0x555555);
-var globalLight = new THREE.HemisphereLight(0xffffff, 0x333333, 1);
-var directionalLight = new THREE.DirectionalLight(0x555555);
-cube.name = "Sauerstoff";
-kugel2.name = "Wasserstoff";
-objects.push(cube);
-objects.push(kugel2);
-objects.push(kugel3);
-objects.push(verbindung1);
-objects.push(verbindung2);
-
-/**
- * Positionieren von Objekten
- */
-directionalLight.position.set(0, -10, 0);
-directionalLight.target.add(cube);
-camera.position.z = 25;
-kugel2.position.set( -10, -4, 0);
-kugel3.position.set( 10, -4, 0);
-verbindung1.position.set((kugel2.position.x - cube.position.x)/2, (kugel2.position.y - cube.position.y)/2, (kugel2.position.z - cube.position.z )/2);
-verbindung2.position.set((kugel3.position.x - cube.position.x)/2, (kugel3.position.y - cube.position.y)/2, (kugel3.position.z - cube.position.z )/2);
-cube.position.set(0, 0, 0);
-
-rotbindung (cube, verbindung1);
-rotbindung (cube, verbindung2);
-
-/**
- * Hinzufügen von Objekten zu der Szene
- */
-cube.add(kugel2);
-cube.add(kugel3);
-cube.add(verbindung1);
-cube.add(verbindung2);
-scene.add(ambientlight);
-scene.add(cube);
-lichtspiel.add(directionalLight);
-lichtspiel.add(globalLight);
-scene.add(lichtspiel); 
-
-
-/**
- * Rendergröße festlegen und einfügen des Renderers in die DOM
- */
-renderer.setSize(826, 700);
-renderer.setClearColor(0x3e3e3e);
-renderer.domElement.id = "cview";
-container.appendChild(renderer.domElement);
-container.appendChild( stats.domElement );
-
-document.addEventListener( 'mousedown', klicksteuerung, false );
-document.addEventListener( 'mousemove', hoversteuerung, false );
-
-render();
-
 
 /**
  * Erstellen der Renderfunktion die immer wieder durchlaufen wird?
@@ -181,9 +148,7 @@ function render (){
 	requestAnimationFrame(render);
 	delta = uhr.getDelta();
 	
-	cube.rotation.y += (delta * 5 * Math.PI / 180 );
-	//lichtspiel.rotation.y -= (delta * 20  * Math.PI / 180 );
-	
+	molekuel.rotation.y += (delta * 5 * Math.PI / 180 );
 	
 	 renderer.render(scene, camera);
 	 stats.update();
@@ -194,7 +159,7 @@ function render (){
  * @param origin 
  * @param target
  */
-function rotbindung ( origin , target) {
+function rotbindung ( origin , target, rotobj) {
 	
 	var quat = new THREE.Quaternion();
 	var vec1 = new THREE.Vector3((target.position.x - origin.position.x), (target.position.y - origin.position.y), (target.position.z - origin.position.z) );
@@ -207,7 +172,7 @@ function rotbindung ( origin , target) {
 	vec3.normalize();
 	
 	quat.setFromAxisAngle(vec3, angle);
-	target.quaternion.multiplyQuaternions(quat, target.quaternion);
+	rotobj.quaternion.multiplyQuaternions(quat, target.quaternion);
 }
 
 /**
