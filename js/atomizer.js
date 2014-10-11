@@ -38,41 +38,52 @@ atomizerApp.controller('MenuCtrl', ['$scope','$http', function(scope, http) {
     $menu.append('<link rel="stylesheet" href="css/menu.css" />');
     $menu.append('<script src="js/menu.js"></script>');
 
-    var levelCounter = 1;
-    scope.levels =[];
-
-
-    ( function levelCall(){ // freakin' self executing function
+    /**
+     *   levelCall
+     *   structure object level for new level
+     **/
+    scope.levels = [];
+    function levelCall(levelCounter){ // self executing function
+        /*
         http({
             url: 'resources/level/level'+levelCounter+'.json',
             method: 'GET'
         }).success(function(data){
             scope.levels[levelCounter-1] ={name: data.name }; //array[0][0] = LevelName
-            console.log("level name: " + scope.levels[levelCounter-1].name);
+            //console.log("level name: " + scope.levels[levelCounter-1].name);
             taskCall(levelCounter, 1);
 
             levelCounter++;
-            levelCall(); // freakin' rekursion 'cause while+ajax is a hell
-        });
-    })();
+            levelCall(); // rekursion: while is endless with ajax
+        });*/
 
+        scope.levels[levelCounter-1] ={};
+        scope.levels[levelCounter-1].tasks = [];
+        taskCall(levelCounter, 1);
+    }
+
+    /**
+     *   taskCall
+     *   crawl directory for tasks in level
+     **/
     function taskCall(level, taskCounter){
-        if(scope.levels[level-1].tasks === undefined){
-            scope.levels[level-1].tasks = [];
-        }
         http({
             url: 'resources/level/'+level+'/task'+taskCounter+'.json',
             method: 'GET'
+
         }).success(function(data){
-            console.log("task name: " + data.name);
-
             scope.levels[level-1].tasks.push(data.name); //array[0][>0] = TaskName
-               console.log("Levels: " +  scope.levels);
+            taskCall(level, ++taskCounter);
 
-            taskCounter++;
-            taskCall(level, taskCounter); // freakin' rekursion 'cause while+ajax is a hell
+        }).error(function(){
+            if(taskCounter !== 1){ // if at least task1 try next level
+                levelCall(++level);
+            }else{
+               scope.levels.pop(); // remove empty last
+            }
         });
     }
+    levelCall(1);
 
 
 }]);
